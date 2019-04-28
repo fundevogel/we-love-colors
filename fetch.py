@@ -54,7 +54,7 @@ sets = {
 
 fetch('graphic-design', 1, 32)
 fetch('fashion-design', 1, 14)
-fetch('industrial-design', 1, 10)
+fetch('product-design', 1, 10)
 
 result = open('./pantone.json', 'w')
 json.dump(sets, result, indent=4)
