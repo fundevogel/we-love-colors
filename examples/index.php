@@ -92,9 +92,10 @@
         $set = json_decode($json, true);
 
         foreach ($set as $color) :
+        $name = $color['name'] !== '' ? $color['name'] : $color['code'];
     ?>
         <div class="grid_item" style="background-color: <?= $color['hex'] ?>" data-clipboard-text="<?= $color['hex'] ?>">
-          <h3><?= $color['code'] ?></h3>
+          <h3><?= $name ?></h3>
         </div>
     <?php endforeach ?>
 
