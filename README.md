@@ -16,3 +16,7 @@ Inspired by [Pantone Finder](https://github.com/picorana/Pantone_finder), whose 
 
 ## Copyright
 Whenever mentioned throughout this project, PANTONE® and other [Pantone LLC](https://www.pantone.com) trademarks are the property of Pantone LLC, a division of [X-Rite](https://www.xrite.com), a [Danaher](https://www.danaher.com) company. We assume neither ownership nor intellectual property of any kind - color codes (and names), RGB values & hexadecimals are publically available on [their website](https://www.pantone.com).
+
+TODO:
+- [ ] Permissions when folder doesn't exist
+- [x] Generating different JSON first
