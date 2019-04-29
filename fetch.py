@@ -2,7 +2,7 @@
 
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
-import json
+import json, os, re
 
 
 ##
@@ -96,6 +96,19 @@ localSets = {
 
 
 ##
+# This function applies a natural sort order to dictionaries inside the
+# list passed as first argument by the key specified as second argument
+# See https://stackoverflow.com/a/8940266
+##
+def natural_sort(list, key=lambda x: x['code']):
+    def get_alphanum_key_func(key):
+        convert = lambda text: int(text) if text.isdigit() else text
+        return lambda s: [convert(c) for c in re.split('([0-9]+)', key(s))]
+    sort_key = get_alphanum_key_func(key)
+    list.sort(key=sort_key)
+
+
+##
 # This function fetches PANTONE® colors
 #
 # Valid `setName` parameter:
@@ -119,7 +132,7 @@ def fetch(setName, firstPage, lastPage):
         html = urlopen(baseUrl + setUrl.get(setName) + str(i))
         soup = BeautifulSoup(html, 'lxml')
 
-        print('Loading page ' + str(i) + '.. done')
+        print('Loading page ' + str(i) + ' .. done')
 
         for remoteElement in soup.findAll('tr')[1:]:
             color = {}
@@ -140,7 +153,7 @@ def fetch(setName, firstPage, lastPage):
 
 
 ##
-# Fetching, extracting & dumping PANTONE® colors
+# Fetching, extracting & dumping PANTONE® colors, sets & subsets
 ##
 
 # Fetching PANTONE® colors
@@ -148,22 +161,36 @@ fetch('graphic-design', 1, 32)
 fetch('fashion-design', 1, 14)
 fetch('product-design', 1, 10)
 
-# Dumping complete PANTONE® color sets
+# Dumping all PANTONE® colors
 with open('./pantone.json', 'w') as file:
     file.write(json.dumps(remoteSets, indent=4))
 
-# Extracting each PANTONE® color subset
+# Creating directory for PANTONE® color sets (if it doesn't exist already)
+file_path = './json'
+os.makedirs(file_path, exist_ok=True)
+
+# Looping through PANTONE® color sets
 for set, colors in remoteSets.items():
-    subset = localSets[set]
-    with open('./sets/' + set + ' (' + str(len(colors)) + ' colors).json', 'w') as file:
+    file_name = set + ' (' + str(len(colors)) + ' colors).json'
+
+    # Dumping PANTONE® color sets to disk
+    with open(file_path + '/' + file_name, 'w') as file:
         file.write(json.dumps(colors, indent=4))
+    print('%s.json has been created.' % file_name)
+
+    subset = localSets[set]
+
+    # Extracting each PANTONE® color subset
     for color in colors:
         code = color['code']
-        if code[2:] == 'P ':
+        if code[0:2] == 'P ':
+            # print(code)
             if code[-2:] == ' C':
+                # print(code)
                 subset['PC'].append(color)
             if code[-2:] == ' U':
                 subset['PU'].append(color)
+                # print(code)
         else:
             if code[-2:] == ' C':
                 subset['C'].append(color)
@@ -185,11 +212,23 @@ for set, colors in remoteSets.items():
             subset['TN'].append(color)
         if code[-3:] == ' SP':
             subset['SP'].append(color)
-        if code[3:] == 'PQ-':
+        if code[0:3] == 'PQ-':
             subset['PQ'].append(color)
 
-# Dumping each PANTONE® color subset
+# Looping through PANTONE® color subsets
 for set, subsets in localSets.items():
+    # Creating directories for PANTONE® color subsets (if they don't exist already)
+    file_path = './json/' + set
+    os.makedirs(file_path, exist_ok=True)
+
+    # Dumping PANTONE® color subsets to disk
     for subset, colors in subsets.items():
-        with open('./sets/subsets/' + set + '/' + subset + ' (' + str(len(colors)) + ' colors).json', 'w') as file:
+        # Applying natural sort order to all 'Graphics' PANTONE® Color System subsets
+        if set == 'graphic-design':
+            natural_sort(colors)
+
+        file_name = subset + ' (' + str(len(colors)) + ' colors).json'
+        with open(file_path + '/' + file_name, 'w') as file:
+            file = open(file_path + '/' + file_name, 'w')
             file.write(json.dumps(colors, indent=4))
+        print('%s.json has been created.' % file_name)
