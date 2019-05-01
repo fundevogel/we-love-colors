@@ -31,3 +31,4 @@ Whenever mentioned throughout this project, PANTONE® and other [Pantone LLC](ht
 - [x] Introduce natural sorting for set `graphics-design`
 - [ ] Deleting entries after being moved to their respective list (eg subset['C'])
 - [ ] Filtering pastels & metallics
+- [ ] Making use of CLI arguments

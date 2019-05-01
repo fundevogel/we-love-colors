@@ -7,7 +7,8 @@ import json, glob, os
 ##
 # Globbing all JSON source files
 ##
-paths = glob.glob('./json/**/*.json', recursive=True)
+paths = glob.glob('./*/json/**/*.json', recursive=True)
+
 
 ##
 # Processing source files
@@ -29,7 +30,7 @@ for path in paths:
     root.insert(0, comment)
     for color in data:
         rgb = color['rgb'][4:-1].split(',')
-        name = color['name'] if color['name'] != '' else color['code']
+        name = color['name'].title() if color['name'] != '' else color['code']
         entry = etree.SubElement(root, 'COLOR')
         entry.set('NAME', name)
         entry.set('SPACE', 'RGB')
@@ -65,7 +66,7 @@ for path in paths:
         file.write('\n')
 
         for color in data:
-            name = color['name'] if color['name'] != '' else color['code']
+            name = color['name'].title() if color['name'] != '' else color['code']
             line = color['rgb'][4:-1].split(',')
 
             for i in range(len(line)):
