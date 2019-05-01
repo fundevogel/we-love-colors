@@ -20,7 +20,7 @@ python3 process.py
 ```
 
 ## Color samples
-If you are looking for a quick way to browse PANTONE® colors, check out the [Pantone Finder](https://github.com/picorana/Pantone_finder) package or [visit their website](https://picorana.github.io/Pantone_finder) to get started. However, there's a quick&dirty preview inside `examples`, which is as easy as opening `index.html`. In case you want to play around with `index.php`, simply `php -S localhost:8000` and enter the world of PANTONE® colors by clicking on a tile to save its hex value to your clipboard - brought to you by [clipboard.js](https://github.com/zenorocha/clipboard.js).
+If you are looking for a quick way to browse PANTONE® colors, check out the [Pantone Finder](https://github.com/picorana/Pantone_finder) package or [visit their website](https://picorana.github.io/Pantone_finder) to get started. However, there's a quick&dirty preview inside each directory below `examples`, which is as easy as opening `index.html`. In case you want to play around with `index.php`, simply `php -S localhost:8000` and enter the world of PANTONE® and RAL® colors by clicking on a tile to save its hex value to your clipboard - brought to you by [clipboard.js](https://github.com/zenorocha/clipboard.js).
 
 ## Copyright
 Whenever mentioned throughout this project, PANTONE® and other [Pantone LLC](https://www.pantone.com) trademarks are the property of Pantone LLC, a division of [X-Rite](https://www.xrite.com), a [Danaher](https://www.danaher.com) company.
@@ -38,4 +38,5 @@ We assume neither ownership nor intellectual property of any kind - color codes 
 - [ ] Adding copyright notice for RAL® (XML + GPL)
 - [x] Adding examples for RAL®
 - [ ] Making use of CLI arguments
+- [x] Automatizing example generation
 - [ ] Combining `fetch.py` & `fetchRAL.py`
