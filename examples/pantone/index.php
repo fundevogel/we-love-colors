@@ -33,7 +33,7 @@
         ini_set('display_errors', 1);
         // GLOBAL FUNCTIONS & VARIABLES
 
-        $files = glob('../pantone/json/*/*.json');
+        $files = glob('../../pantone/json/*/*.json');
 
 
         // See https://stackoverflow.com/a/34244525

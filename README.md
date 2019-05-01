@@ -35,5 +35,7 @@ We assume neither ownership nor intellectual property of any kind - color codes 
 - [x] Introduce natural sorting for set `graphics-design`
 - [x] ~~Deleting~~ Skipping entries after being moved to their respective list
 - [x] Filtering neons, pastels & metallics
+- [ ] Adding copyright notice for RAL® (XML + GPL)
+- [x] Adding examples for RAL®
 - [ ] Making use of CLI arguments
 - [ ] Combining `fetch.py` & `fetchRAL.py`
