@@ -1,4 +1,4 @@
-# We :heart: Pantone® & RAL®
+# We love colors!
 This library provides an easy way to generate [*color palettes*](https://www.etymonline.com/search?q=Palette):
 
 > In computer graphics, a palette is a finite set of colors.
