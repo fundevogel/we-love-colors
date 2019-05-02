@@ -53,7 +53,7 @@
 
     <!-- COPYRIGHT NOTICE -->
     <header>
-      PANTONE® and other <a href="https://www.pantone.com">Pantone LLC</a> trademarks are the property of Pantone LLC,
+      PANTONE® and related trademarks are the property of <a href="https://www.pantone.com">Pantone LLC</a>,
       a division of <a href="https://www.xrite.com">X-Rite</a>, a <a href="https://www.danaher.com">Danaher</a> company.
     </header>
 
@@ -106,7 +106,7 @@
 
     <!-- COPYRIGHT NOTICE -->
     <footer>
-      PANTONE® and other <a href="https://www.pantone.com">Pantone LLC</a> trademarks are the property of Pantone LLC,
+      PANTONE® and related trademarks are the property of <a href="https://www.pantone.com">Pantone LLC</a>,
       a division of <a href="https://www.xrite.com">X-Rite</a>, a <a href="https://www.danaher.com">Danaher</a> company.
     </footer>
 

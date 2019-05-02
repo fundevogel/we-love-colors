@@ -53,7 +53,7 @@
 
     <!-- COPYRIGHT NOTICE -->
     <header>
-      RAL® and other trademarks displayed here are the property of <a href="https://www.ral-farben.de">RAL gGmbH</a> (non-profit LLC) or
+      RAL® and related trademarks are the property of <a href="https://www.ral-farben.de">RAL gGmbH</a> (non-profit LLC) or
       <a href="https://www.ral.de">RAL Deutsches Institut für Gütesicherung und Kennzeichnung e. V.</a>.
     </header>
 
@@ -106,7 +106,7 @@
 
     <!-- COPYRIGHT NOTICE -->
     <footer>
-      RAL® and other trademarks displayed here are the property of <a href="https://www.ral-farben.de">RAL gGmbH</a> (non-profit LLC) or
+      RAL® and related trademarks are the property of <a href="https://www.ral-farben.de">RAL gGmbH</a> (non-profit LLC) or
       <a href="https://www.ral.de">RAL Deutsches Institut für Gütesicherung und Kennzeichnung e. V.</a>.
     </footer>
 
