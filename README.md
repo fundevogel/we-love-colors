@@ -33,6 +33,9 @@ The same applies to RAL® and related trademarks of [RAL gGmbH](https://www.ral-
 
 We assume neither ownership nor intellectual property of any kind - color codes (and names), sRGB and/or hexadecimal values are publically available on their respective websites.
 
+## Similar projects
+- For Scribus, there's also the (currently unmaintained) package [`SwatchBooker`](http://www.selapa.net/swatchbooker)
+
 ## Roadmap
 - [x] Generating different JSON first
 - [x] Permissions when folder doesn't exist
