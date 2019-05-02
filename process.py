@@ -35,6 +35,10 @@ copyright = {
         'xml': '\n    Copic® and related trademarks are the property of\n    Too Marker Corporation (https://www.toomarker.co.jp/en)\n  ',
         'gpl': '##\n# Copic® and related trademarks are the property of\n# Too Marker Corporation (https://www.toomarker.co.jp/en)\n##\n',
     },
+    'prismacolor': {
+        'xml': '\n    Prismacolor® and related trademarks are the property of\n    Berol Corporation (http://www.berol.co.uk), owned by Sanford L.P. (http://www.sanfordb2b.com),\n    a Newell Brands (https://www.newellbrands.com) company\n  ',
+        'gpl': '##\n# Prismacolor® and related trademarks are the property of\n# Berol Corporation (http://www.berol.co.uk), owned by Sanford L.P. (http://www.sanfordb2b.com),\n# a Newell Brands (https://www.newellbrands.com) company\n##\n',
+    },
 }
 
 

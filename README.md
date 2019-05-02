@@ -9,7 +9,7 @@ This library provides an easy way to generate [*color palettes*](https://www.ety
 > *Swatches* are named colors, tints, gradients, and patterns.
 > — [Adobe Illustrator](https://helpx.adobe.com/illustrator/using/using-creating-swatches.html)
 
-.. featuring [PANTONE®](https://www.pantone.com), [RAL®](https://www.ral-farben.de) and [Dulux®](https://www.dulux.com.au) colors (proprietary color spaces). For now, `we-love-colors` creates master palettes for use in [Scribus](https://www.scribus.net), an open source desktop publishing program, as well as [GIMP](https://www.gimp.org) and [Inkscape](https://inkscape.org).
+.. featuring [PANTONE®](https://www.pantone.com), [RAL®](https://www.ral-farben.de), [Dulux®](https://www.dulux.com.au) as well as [Copic®](https://www.copicmarker.com) and [Prismacolor®](https://www.prismacolor.com) (proprietary color spaces). For now, `we-love-colors` creates master palettes for use in [Scribus](https://www.scribus.net), an open source desktop publishing program, as well as [GIMP](https://www.gimp.org) and [Inkscape](https://inkscape.org).
 
 ## Getting started
 .. was never easier. Make sure Python3 is intalled on your system, then simply do:
@@ -33,6 +33,7 @@ The same applies to ..
 - RAL® and related trademarks of [RAL gGmbH](https://www.ral-farben.de) (non-profit LLC) and [RAL Deutsches Institut für Gütesicherung und Kennzeichnung e. V.](https://www.ral.de)
 - Dulux® and related trademarks of [AkzoNobel N.V.](https://www.akzonobel.com) (worldwide) and [DuluxGroup](https://www.dulux.com.au) (Australia & New Zealand)
 - Copic® and related trademarks of [Too Marker Corporation](https://www.toomarker.co.jp/en)
+- Prismacolor® and related trademarks of [Berol Corporation](http://www.berol.co.uk), owned by [Sanford L.P.](http://www.sanfordb2b.com), a [Newell Brands](https://www.newellbrands.com) company.
 
 We assume neither ownership nor intellectual property of any kind - color codes (and names), sRGB and/or hexadecimal values are publically available on (one of) their respective websites.
 
