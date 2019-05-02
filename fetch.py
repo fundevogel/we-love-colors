@@ -180,18 +180,18 @@ def fetch(setName, firstPage, lastPage):
 ##
 
 # Fetching PANTONE® colors
-# fetch('graphic-design', 1, 32)
-# fetch('fashion-design', 1, 14)
-# fetch('product-design', 1, 10)
+fetch('graphic-design', 1, 32)
+fetch('fashion-design', 1, 14)
+fetch('product-design', 1, 10)
 
 # Creating directory for PANTONE® color sets (if it doesn't exist already)
 root_path =  './pantone'
 json_path = root_path + '/json'
 
 try:
-   shutil.rmtree(json_path)
+    shutil.rmtree(json_path)
 except:
-   print('Error while deleting directory')
+    print('Error while deleting directory')
 
 os.makedirs(json_path, exist_ok=True)
 

@@ -3,7 +3,7 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 from PIL import ImageFile
-import json, os
+import json, shutil, os
 
 # TODO: Making use of arguments, see https://www.tutorialspoint.com/python3/python_command_line_arguments.htm
 
@@ -99,24 +99,27 @@ def fetch(setName):
 ##
 
 # Fetching RAL® colors
-# fetch('classic')
-# fetch('design')
-# fetch('effect')
-# fetch('plastics')
+fetch('classic')
+fetch('design')
+fetch('effect')
+fetch('plastics')
 
 # Creating directory for RAL® color sets (if it doesn't exist already)
 root_path =  './ral'
 json_path = root_path + '/json'
+
+try:
+    shutil.rmtree(json_path)
+except:
+    print('Error while deleting directory')
+
 os.makedirs(json_path, exist_ok=True)
 
 # Dumping all RAL® colors
-# with open(root_path + '/ral.json', 'w') as file:
-#     file.write(json.dumps(sets, indent=4))
+with open(root_path + '/ral.json', 'w') as file:
+    file.write(json.dumps(sets, indent=4))
 
-with open(root_path + '/ral.json', 'r') as file:
-    data = json.load(file)
-
-for set, colors in data.items():
+for set, colors in sets.items():
     if len(colors) == 0:
         break
 
