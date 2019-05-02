@@ -16,7 +16,7 @@ sets = {
 
 
 ##
-# This function fetches Dulux® colors
+# This function fetches Copic® colors
 #
 # Valid `setName` parameter:
 # - 'graphic-design', currently 15870 colors (pp 1-32)
@@ -51,13 +51,13 @@ def fetch():
 
 
 ##
-# Fetching, extracting & dumping Dulux® colors, sets & subsets
+# Fetching, extracting & dumping Copic® colors, sets & subsets
 ##
 
-# Fetching Dulux® colors
+# Fetching Copic® colors
 fetch()
 
-# Creating directory for Dulux® color sets (if it doesn't exist already)
+# Creating directory for Copic® color sets (if it doesn't exist already)
 root_path =  './copic'
 json_path = root_path + '/json'
 
@@ -68,7 +68,7 @@ except:
 
 os.makedirs(json_path, exist_ok=True)
 
-# Dumping all Dulux® colors
+# Dumping all Copic® colors
 with open(root_path + '/copic.json', 'w') as file:
     file.write(json.dumps(sets, indent=4))
 
@@ -78,7 +78,7 @@ for set, colors in sets.items():
 
     file_name = set + ' (' + str(len(colors)) + ' colors).json'
 
-    # Dumping Dulux® color sets to disk
+    # Dumping Copic® color sets to disk
     with open(json_path + '/' + file_name, 'w') as file:
         file.write(json.dumps(colors, indent=4))
     print('%s has been created.' % file_name)

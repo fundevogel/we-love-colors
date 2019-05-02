@@ -8,7 +8,7 @@ import json, shutil, os
 # TODO: Making use of arguments, see https://www.tutorialspoint.com/python3/python_command_line_arguments.htm
 
 ##
-# Defining sets & subsets to be filled later
+# Defining sets to be filled later
 ##
 
 sets = {
@@ -75,12 +75,12 @@ def fetch(setName):
             rgb = [str(i) for i in result]
 
             # Converting to hexadecimal color code, see https://stackoverflow.com/a/3380739
-            hex = '#%02x%02x%02x' % result
+            hexadecimal = '#%02x%02x%02x' % result
 
             color = {}
             color['code'] = list_element[1].strip()
             color['rgb'] = 'rgb(' + ','.join(rgb) + ')'
-            color['hex'] = hex.upper()
+            color['hex'] = hexadecimal.upper()
             color['name'] = ''
 
             if len(list_element) > 2:
