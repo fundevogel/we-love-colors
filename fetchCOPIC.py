@@ -17,11 +17,6 @@ sets = {
 
 ##
 # This function fetches Copic® colors
-#
-# Valid `setName` parameter:
-# - 'graphic-design', currently 15870 colors (pp 1-32)
-# - 'fashion-design', currently 2443 colors (pp 1-14)
-# - 'product-design', currently 4967 colors (pp 1-10)
 ##
 def fetch():
     # One baseURL to rule them all
