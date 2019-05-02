@@ -31,6 +31,10 @@ copyright = {
         'xml': '\n    Dulux® and related trademarks are the property of\n    AkzoNobel N.V. (https://www.akzonobel.com) (joint-stock company) (worldwide) or\n    DuluxGroup (https://www.dulux.com.au) (Australia & New Zealand) \n  ',
         'gpl': '##\n# Dulux® and related trademarks are the property of\n# AkzoNobel N.V. (https://www.akzonobel.com) (joint-stock company) (worldwide) or\n# DuluxGroup (https://www.dulux.com.au) (Australia & New Zealand) \n##\n',
     },
+    'copic': {
+        'xml': '\n    Copic® and related trademarks are the property of\n    Too Marker Corporation (https://www.toomarker.co.jp/en)\n  ',
+        'gpl': '##\n# Copic® and related trademarks are the property of\n# Too Marker Corporation (https://www.toomarker.co.jp/en)\n##\n',
+    },
 }
 
 
