@@ -50,4 +50,4 @@ We assume neither ownership nor intellectual property of any kind - color codes 
 - [x] Adding examples for all color palettes
 - [ ] Making use of CLI arguments
 - [x] Automatizing example generation
-- [ ] Combining all `fetch` scripts
+- [x] Combining all `fetch` scripts
