@@ -1,0 +1,19 @@
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+    grid-gap: 5px;
+    margin-bottom: 1.5rem;
+}
+
+.grid_item {
+    width: 75px;
+    height: 75px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    cursor: copy;
+}
+
+h3 {
+    font-size: 14px;
+}

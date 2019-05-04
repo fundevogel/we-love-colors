@@ -51,3 +51,4 @@ We assume neither ownership nor intellectual property of any kind - color codes 
 - [ ] Making use of CLI arguments
 - [x] Automatizing example generation
 - [x] Combining all `fetch` scripts
+- [x] Cleaning up examples (merge CSS, remove RGB2hex & PHP error settings)
