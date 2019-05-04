@@ -1,3 +1,6 @@
-/**/*.json
-/**/*.xml
-/**/*.gpl
+# Cache + compiled files
+__pycache__/
+*.pyc
+
+# Gotta fetch 'em all!
+/palettes/*/**/*
