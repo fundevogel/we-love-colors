@@ -27,6 +27,12 @@ class Prismacolor(Palette):
     # Global JSON path
     json_path = './palettes/' + identifier + '/json'
 
+    # Copyright notices
+    copyright = {
+        'xml': '\n    Prismacolor® and related trademarks are the property of\n    Berol Corporation (http://www.berol.co.uk), owned by Sanford L.P. (http://www.sanfordb2b.com),\n    a Newell Brands (https://www.newellbrands.com) company\n  ',
+        'gpl': '##\n# Prismacolor® and related trademarks are the property of\n# Berol Corporation (http://www.berol.co.uk), owned by Sanford L.P. (http://www.sanfordb2b.com),\n# a Newell Brands (https://www.newellbrands.com) company\n##\n',
+    }
+
 
     def __init__(self):
         super().__init__()

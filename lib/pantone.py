@@ -30,6 +30,12 @@ class Pantone(Palette):
     # Global JSON path
     json_path = './palettes/' + identifier + '/json'
 
+    # Copyright notices
+    copyright = {
+        'xml': '\n    PANTONE® and related trademarks are the property of\n    Pantone LLC (https://www.pantone.com), a division of X-Rite, a Danaher company\n  ',
+        'gpl': '##\n# PANTONE® and related trademarks are the property of\n# Pantone LLC (https://www.pantone.com), a division of X-Rite, a Danaher company\n##\n'
+    }
+
 
     def __init__(self):
         super().__init__()
@@ -325,4 +331,4 @@ class Pantone(Palette):
                 with open(json_path, 'w') as file:
                     file.write(json.dumps(colors, indent=4))
 
-                print('%s has been created.' % json_path)
+                print('Generating %s .. done' % json_path)
