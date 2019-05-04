@@ -27,6 +27,12 @@ class Dulux(Palette):
     # Global JSON path
     json_path = './palettes/' + identifier + '/json'
 
+    # Copyright notices
+    copyright = {
+        'xml': '\n    Dulux® and related trademarks are the property of\n    AkzoNobel N.V. (https://www.akzonobel.com) (joint-stock company) (worldwide) or\n    DuluxGroup (https://www.dulux.com.au) (Australia & New Zealand) \n  ',
+        'gpl': '##\n# Dulux® and related trademarks are the property of\n# AkzoNobel N.V. (https://www.akzonobel.com) (joint-stock company) (worldwide) or\n# DuluxGroup (https://www.dulux.com.au) (Australia & New Zealand) \n##\n',
+    }
+
 
     def __init__(self):
         super().__init__()
