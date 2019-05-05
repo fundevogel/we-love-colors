@@ -34,8 +34,11 @@ Options:
 Commands:
   fetch    ARGS: pantone | ral | dulux | copic | prismacolor
   process  ARGS: pantone | ral | dulux | copic | prismacolor
+```
 
 
+
+```bash
 # Example 1 - Gotta fetch 'em `--all`:
 $ python main.py fetch --all && python main.py process --all
 
@@ -64,15 +67,8 @@ We assume neither ownership nor intellectual property of any kind - color codes 
 ## Similar projects
 - For Scribus, there's also the (currently unmaintained) package [`SwatchBooker`](http://www.selapa.net/swatchbooker)
 
-## Roadmap
-- [x] Generating different JSON first
-- [x] Permissions when folder doesn't exist
-- [x] Introduce natural sorting for set `graphics-design`
-- [x] ~~Deleting~~ Skipping entries after being moved to their respective list
-- [x] Filtering neons, pastels & metallics
-- [x] Adding copyright notice for RAL®/Dulux® (XML + GPL) + fallback option
-- [x] Adding examples for all color palettes
-- [x] Making use of CLI arguments
-- [x] Automatizing example generation
-- [x] Combining all `fetch` scripts
-- [x] Cleaning up examples (merge CSS, remove RGB2hex & PHP error settings)
+
+**Happy coding!**
+
+
+:copyright: Fundevogel Kinder- und Jugendbuchhandlung
