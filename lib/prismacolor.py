@@ -44,7 +44,7 @@ class Prismacolor(Palette):
     # Valid `set_name` parameter:
     # - 'premier', currently 150 colors
     ##
-    def fetch(self, set_name):
+    def fetch(self, set_name='premier'):
         # One baseURL to rule them all
         base_url = 'https://kredki.eu/pl/p/Prismacolor-Colored-Pencils-Kredki-Art-150-Kol/75'
 

@@ -44,7 +44,7 @@ class Copic(Palette):
     # Valid `set_name` parameter:
     # - 'copic', currently 289 colors
     ##
-    def fetch(self, set_name):
+    def fetch(self, set_name='copic'):
         # One baseURL to rule them all
         base_url = 'https://www.copicmarker.com/collections/collect'
 
