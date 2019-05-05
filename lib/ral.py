@@ -16,7 +16,7 @@ from PIL import ImageFile
 from palette import Palette
 
 
-class Ral(Palette):
+class RAL(Palette):
     # Dictionary holding fetched colors
     sets = {
         'classic': [],
@@ -114,3 +114,13 @@ class Ral(Palette):
                     self.sets[identifier].append(color)
 
                 print('Loading ' + color['code'] + ' in set "' + set_name + '" .. done')
+
+
+    ##
+    # Fetches all RAL® colors at once
+    ##
+    def fetch_all(self):
+        self.fetch('classic')
+        self.fetch('design')
+        self.fetch('effect')
+        self.fetch('plastics')

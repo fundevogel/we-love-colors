@@ -12,11 +12,35 @@ This library provides an easy way to generate [*color palettes*](https://www.ety
 .. featuring [PANTONE®](https://www.pantone.com), [RAL®](https://www.ral-farben.de), [Dulux®](https://www.dulux.com.au) as well as [Copic®](https://www.copicmarker.com) and [Prismacolor®](https://www.prismacolor.com) (proprietary color spaces). For now, `we-love-colors` creates master palettes for use in [Scribus](https://www.scribus.net), an open source desktop publishing program, as well as [GIMP](https://www.gimp.org) and [Inkscape](https://inkscape.org).
 
 ## Getting started
-.. was never easier. Make sure Python3 is intalled on your system, then simply do:
+Depending on your setup you might prefer a ..
+
+### Local installation via `virtualenv`
+Running `setup.sh` will install all dependencies inside a virtual environment, ready for action.
+
+### Global installation via `requirements.txt`
+It's as easy as `pip install -r requirements.txt`, but you might want to make sure that Python v3 is installed on your system.
+
+## Usage
+Fetching color sets and processing them is really straightforward - for everything else, there's  `--help`:
 
 ```bash
-python3 fetch.py # or any other `fetch*` script
-python3 process.py
+$ python main.py
+Usage: main.py [OPTIONS] COMMAND [ARGS]...
+
+Options:
+  -v, --version  Show the version and exit.
+  -h, --help     Show this message and exit.
+
+Commands:
+  fetch    ARGS: pantone | ral | dulux | copic | prismacolor
+  process  ARGS: pantone | ral | dulux | copic | prismacolor
+
+
+# Example 1 - Gotta fetch 'em `--all`:
+$ python main.py fetch --all && python main.py process --all
+
+# Example 2 - Fetching two sets & processing them:
+$ python main.py fetch copic dulux && python main.py process copic dulux # or simply `--all`
 ```
 
 ## Color samples
@@ -48,7 +72,7 @@ We assume neither ownership nor intellectual property of any kind - color codes 
 - [x] Filtering neons, pastels & metallics
 - [x] Adding copyright notice for RAL®/Dulux® (XML + GPL) + fallback option
 - [x] Adding examples for all color palettes
-- [ ] Making use of CLI arguments
+- [x] Making use of CLI arguments
 - [x] Automatizing example generation
 - [x] Combining all `fetch` scripts
 - [x] Cleaning up examples (merge CSS, remove RGB2hex & PHP error settings)

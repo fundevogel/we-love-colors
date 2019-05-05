@@ -88,6 +88,15 @@ class Pantone(Palette):
 
 
     ##
+    # Fetches all PANTONE® colors at once
+    ##
+    def fetch_all(self):
+        self.fetch('graphic-design', 1, 32)
+        self.fetch('fashion-design', 1, 14)
+        self.fetch('product-design', 1, 10)
+
+
+    ##
     # Creates JSON files for Dulux® color sets
     ##
     def create_json(self, input_filename=''):

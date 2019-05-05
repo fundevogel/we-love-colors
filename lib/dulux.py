@@ -43,7 +43,7 @@ class Dulux(Palette):
     # Valid `set_name` parameter:
     # - 'dulux', currently 1768 colors
     ##
-    def fetch(self, set_name):
+    def fetch(self, set_name='dulux'):
         # One baseURL to rule them all
         base_url = 'https://colour.dulux.ca/all-colors'
 
