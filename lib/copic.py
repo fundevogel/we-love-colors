@@ -24,9 +24,6 @@ class Copic(Palette):
     # Identifier
     identifier = 'copic'
 
-    # Global JSON path
-    json_path = './palettes/' + identifier + '/json'
-
     # Copyright notices
     copyright = {
         'xml': '\n    Copic® and related trademarks are the property of\n    Too Marker Corporation (https://www.toomarker.co.jp/en)\n  ',

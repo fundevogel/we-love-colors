@@ -24,9 +24,6 @@ class Dulux(Palette):
     # Identifier
     identifier = 'dulux'
 
-    # Global JSON path
-    json_path = './palettes/' + identifier + '/json'
-
     # Copyright notices
     copyright = {
         'xml': '\n    Dulux® and related trademarks are the property of\n    AkzoNobel N.V. (https://www.akzonobel.com) (joint-stock company) (worldwide) or\n    DuluxGroup (https://www.dulux.com.au) (Australia & New Zealand) \n  ',
