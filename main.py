@@ -28,7 +28,7 @@ class_map = {
 }
 
 @click.group(context_settings=CONTEXT_SETTINGS)
-@click.version_option('1.0.0-beta.1', '-v', '--version')
+@click.version_option('1.0.0-beta.2', '-v', '--version')
 def cli():
     pass
 
