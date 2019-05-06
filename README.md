@@ -9,7 +9,18 @@ This library provides an easy way to generate [*color palettes*](https://www.ety
 > *Swatches* are named colors, tints, gradients, and patterns.
 > — [Adobe Illustrator](https://helpx.adobe.com/illustrator/using/using-creating-swatches.html)
 
-.. featuring [PANTONE®](https://www.pantone.com), [RAL®](https://www.ral-farben.de), [Dulux®](https://www.dulux.com.au) as well as [Copic®](https://www.copicmarker.com) and [Prismacolor®](https://www.prismacolor.com) (proprietary color spaces). For now, `we-love-colors` creates master palettes for use in [Scribus](https://www.scribus.net), an open source desktop publishing program, as well as [GIMP](https://www.gimp.org) and [Inkscape](https://inkscape.org).
+.. featuring the following (proprietary) color spaces:
+- [PANTONE®](https://www.pantone.com)
+- [RAL®](https://www.ral-farben.de)
+- [Dulux®](https://www.dulux.com.au)
+- [Copic®](https://www.copicmarker.com)
+- [Prismacolor®](https://www.prismacolor.com)
+
+For now, `we-love-colors` creates master palettes for use in
+- [Scribus](https://www.scribus.net) (XML)
+- [GIMP](https://www.gimp.org) and [Inkscape](https://inkscape.org) (GPL)
+- [AutoCAD](https://www.autodesk.com/products/autocad) (ACB)
+- [LibreOffice](https://www.libreoffice.org) (SOC)
 
 ## Getting started
 Depending on your setup you might prefer a ..
@@ -36,15 +47,29 @@ Commands:
   process  ARGS: pantone | ral | dulux | copic | prismacolor
 ```
 
-
+Using its commands `fetch` and `process` is fairly easy, like that:
 
 ```bash
 # Example 1 - Gotta fetch 'em `--all`:
-$ python main.py fetch --all && python main.py process --all
+$ python main.py fetch --all && python main.py process
 
-# Example 2 - Fetching two sets & processing them:
-$ python main.py fetch copic dulux && python main.py process copic dulux # or simply `--all`
+# Example 2 - Fetching specific sets & processing them:
+$ python main.py fetch copic dulux && python main.py process copic dulux
 ```
+
+### FAQ
+**Q: But where do all those files go?**
+**A:** That depends, ..
+- .. `.xml` files may be loaded individually with `Edit - Colours & Fills - Solid Colours - Import` (Scribus)
+- .. `.soc` files belong here:
+  - `~\AppData\Roaming\libreoffice\3\user` (Windows + PowerShell, otherwise `%userprofile%`)
+  - `~/Library/Application Support/libreoffice/4/user/config` (Mac)
+  - `~/.config/libreoffice/4/user/config` (Linux)
+- .. installing `.gpl` files boils down to:
+  - moving them to any path specified in `Edit - Preferences - Folders - Palettes` (GIMP)
+  - moving them to `palettes` under directory specified in `Edit - Preferences - System - User Config` (Inkscape)
+- .. installing `.acb` files is [pretty straightforward](https://knowledge.autodesk.com/support/autocad/learn-explore/caas/CloudHelp/cloudhelp/2016/ENU/AutoCAD-Core/files/GUID-17E00AB3-3065-4F1B-A1C3-C4963396D2CB-htm.html)
+
 
 ## Color samples
 If you are looking for a quick way to browse PANTONE® colors, check out the [Pantone Finder](https://github.com/picorana/Pantone_finder) package or [visit their website](https://picorana.github.io/Pantone_finder) to get started.
