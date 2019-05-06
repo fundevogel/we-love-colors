@@ -4,6 +4,7 @@
 # IMPORTS
 # For more information, see https://www.python.org/dev/peps/pep-0008/#imports
 ##
+
 import click
 
 from lib.pantone import Pantone
@@ -63,7 +64,8 @@ def fetch(sets, fetch_all):
 
 @cli.command()
 @click.argument('sets', nargs=-1)
-def process(sets):
+@click.option('-f', '--format', type=click.Choice(['xml', 'gpl', 'acb', 'soc']), help='Only given format will be generated.')
+def process(sets, format=''):
     """
     ARGS:
     pantone | ral | dulux | copic | prismacolor
@@ -76,7 +78,12 @@ def process(sets):
     for set in sets:
         if set in valid_sets:
             object = class_map[set]()
-            object.make_palettes()
+
+            if format != '':
+                make_palette = getattr(object, 'make_' + format, None)
+                make_palette()
+            else:
+                object.make_palettes()
         else:
             print('"' + set + '" isn\'t available. Please provide a valid color space,\nsuch as "pantone", "ral", "dulux", "copic" & "prismacolor".')
             continue

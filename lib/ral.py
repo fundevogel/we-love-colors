@@ -34,9 +34,6 @@ class RAL(Palette):
     # Identifier
     identifier = 'ral'
 
-    # Global JSON path
-    json_path = './palettes/' + identifier + '/json'
-
     # Copyright notices
     copyright = {
         'xml': '\n    RAL® and related trademarks are the property of\n    RAL gGmbH (https://www.ral-farben.de) (non-profit LLC) or\n    RAL Deutsches Institut für Gütesicherung und Kennzeichnung e. V. (https://www.ral.de)\n  ',

@@ -15,7 +15,18 @@ from lxml import etree
 
 class Palette:
     def __init__(self):
+        # Copyright notices
+        self.default_copyright = {
+            'xml': '\n    For copyright and other legal information,\n    please refer to "README.md" in the root of this project\n  ',
+            'gpl': '##\n# For copyright and other legal information, please refer to "README.md" in the root of this project\n##\n',
+        }
+
+        # Creating global JSON path
+        self.json_path = './palettes/' + self.identifier + '/json'
         os.makedirs(self.json_path, exist_ok=True)
+
+        # Globbing all JSON source files
+        self.json_files = glob.glob(self.json_path + '/*/*.json', recursive=True)
 
 
     ##
@@ -64,28 +75,26 @@ class Palette:
     # Makes color palettes in various formats
     ##
     def make_palettes(self):
-        # Copyright notices
-        default_copyright = {
-            'xml': '\n    For copyright and other legal information,\n    please refer to "README.md" in the root of this project\n  ',
-            'gpl': '##\n# For copyright and other legal information, please refer to "README.md" in the root of this project\n##\n',
-        }
+        self.make_xml()
+        self.make_gpl()
+        self.make_acb()
+        self.make_soc()
 
-        # Globbing all JSON source files
-        paths = glob.glob('./palettes/' + self.identifier + '/json/*/*.json', recursive=True)
 
-        for path in paths:
+    # Builds XML color palette (Scribus)
+    def make_xml(self):
+        for path in self.json_files:
+            output_path = os.path.dirname(path).replace('/json', '/xml')
             file_name = os.path.basename(path).replace('.json', '')
+            xml_file = output_path + '/' + file_name + '.xml'
+
+            root = etree.Element('SCRIBUSCOLORS')
+            comment = etree.Comment(self.copyright.get('xml', self.default_copyright['xml']))
+            root.insert(0, comment)
 
             with open(path, 'r') as file:
                 data = json.load(file)
 
-
-            ##
-            # Building XML color palettes for Scribus
-            ##
-            root = etree.Element('SCRIBUSCOLORS')
-            comment = etree.Comment(self.copyright.get('xml', default_copyright['xml']))
-            root.insert(0, comment)
             for color in data:
                 rgb = color['rgb'][4:-1].split(',')
                 name = color['name'].title() if color['name'] != '' else color['code']
@@ -98,33 +107,35 @@ class Palette:
                 entry.set('B', rgb[2])
 
             # Creating directories for XML color palettes (if it doesn't exist already)
-            output_path = os.path.dirname(path).replace('/json', '/xml')
             os.makedirs(output_path, exist_ok=True)
 
             # Writing XML color palettes to disk (mirroring JSON source structure)
-            xml_file = output_path + '/' + file_name + '.xml'
             tree = etree.ElementTree(root)
             tree.write(xml_file, xml_declaration=True, encoding='UTF-8', pretty_print=True)
 
             print('Generating %s .. done' % xml_file)
 
 
-            ##
-            # Building GPL color palettes for GIMP/Inkscape
-            ##
-            title = file_name.title() if self.identifier != 'pantone' else file_name.replace('colors', 'Colors')
+    # Builds GPL color palette (GIMP + Inkscape)
+    def make_gpl(self):
+        for path in self.json_files:
+            output_path = os.path.dirname(path).replace('/json', '/gpl')
+            file_name = os.path.basename(path).replace('.json', '')
+            gpl_file = output_path + '/' + file_name + '.gpl'
+
+            with open(path, 'r') as file:
+                data = json.load(file)
 
             # Creating directories for GPL color palettes (if it doesn't exist already)
-            output_path = os.path.dirname(path).replace('/json', '/gpl')
             os.makedirs(output_path, exist_ok=True)
 
             # Writing GPL color palettes to disk (mirroring JSON source structure)
-            gpl_file = output_path + '/' + file_name + '.gpl'
-
             with open(gpl_file, 'w') as file:
+                title = file_name.title() if self.identifier != 'pantone' else file_name.replace('colors', 'Colors')
+
                 file.write('GIMP Palette\n')
                 file.write('Name: ' + title + '\n')
-                file.write(self.copyright.get('xml', default_copyright['xml']))
+                file.write(self.copyright.get('xml', self.default_copyright['xml']))
                 file.write('\n')
 
                 for color in data:
@@ -140,11 +151,20 @@ class Palette:
             print('Generating %s .. done' % gpl_file)
 
 
-            ##
-            # Building ACB color palettes for AutoCAD
-            ##
+    # Builds ACB color palette (AutoCAD)
+    def make_acb(self):
+        for path in self.json_files:
+            output_path = os.path.dirname(path).replace('/json', '/acb')
+            file_name = os.path.basename(path).replace('.json', '')
+            acb_file = output_path + '/' + file_name + '.acb'
+
             root = etree.Element('colorbook')
+
             title = etree.SubElement(root, 'bookName')
+            title.text = file_name.title() if self.identifier != 'pantone' else file_name.replace('colors', 'Colors')
+            comment = etree.Comment(self.copyright.get('xml', self.default_copyright['xml']))
+            root.insert(0, comment)
+
             color_page = etree.SubElement(root, 'colorPage')
             page_color = etree.SubElement(color_page, 'pageColor')
             rgb8 = etree.SubElement(page_color, 'RGB8')
@@ -153,13 +173,14 @@ class Palette:
                 'green': '100',
                 'blue': '100',
             }
+
             for color, value in page_background.items():
                 entry = etree.SubElement(rgb8, color)
                 entry.text = value
 
-            title.text = file_name.title() if self.identifier != 'pantone' else file_name.replace('colors', 'Colors')
-            comment = etree.Comment(self.copyright.get('xml', default_copyright['xml']))
-            root.insert(0, comment)
+            with open(path, 'r') as file:
+                data = json.load(file)
+
             for color in data:
                 rgb = color['rgb'][4:-1].split(',')
                 name = color['name'].title() if color['name'] != '' else color['code']
@@ -177,20 +198,22 @@ class Palette:
                     entry.text = value
 
             # Creating directories for XML color palettes (if it doesn't exist already)
-            output_path = os.path.dirname(path).replace('/json', '/acb')
             os.makedirs(output_path, exist_ok=True)
 
             # Writing XML color palettes to disk (mirroring JSON source structure)
-            acb_file = output_path + '/' + file_name + '.acb'
             tree = etree.ElementTree(root)
             tree.write(acb_file, xml_declaration=True, encoding='UTF-8', pretty_print=True)
 
             print('Generating %s .. done' % acb_file)
 
 
-            ##
-            # Building SOC color palettes for Open/LibreOffice
-            ##
+    # Builds SOC color palette (OpenOffice + LibreOffice)
+    def make_soc(self):
+        for path in self.json_files:
+            output_path = os.path.dirname(path).replace('/json', '/soc')
+            file_name = os.path.basename(path).replace('.json', '')
+            soc_file = output_path + '/' + file_name + '.soc'
+
             namespaces = {
                 'office': 'http://openoffice.org/2000/office',
                 'style': 'http://openoffice.org/2000/style',
@@ -211,8 +234,12 @@ class Palette:
                 'config': 'http://openoffice.org/2001/config',
             }
             root = etree.Element('color-table', nsmap=namespaces)
-            comment = etree.Comment(self.copyright.get('xml', default_copyright['xml']))
+            comment = etree.Comment(self.copyright.get('xml', self.default_copyright['xml']))
             root.insert(0, comment)
+
+            with open(path, 'r') as file:
+                data = json.load(file)
+
             for color in data:
                 name = color['name'].title() if color['name'] != '' else color['code']
                 entry = etree.SubElement(root, 'color')
@@ -221,11 +248,9 @@ class Palette:
                 entry.set('color', color['hex'])
 
             # Creating directories for XML color palettes (if it doesn't exist already)
-            output_path = os.path.dirname(path).replace('/json', '/soc')
             os.makedirs(output_path, exist_ok=True)
 
             # Writing XML color palettes to disk (mirroring JSON source structure)
-            soc_file = output_path + '/' + file_name + '.soc'
             tree = etree.ElementTree(root)
             tree.write(soc_file, xml_declaration=True, encoding='UTF-8', pretty_print=True)
 

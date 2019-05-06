@@ -27,9 +27,6 @@ class Pantone(Palette):
     # Identifier
     identifier = 'pantone'
 
-    # Global JSON path
-    json_path = './palettes/' + identifier + '/json'
-
     # Copyright notices
     copyright = {
         'xml': '\n    PANTONE® and related trademarks are the property of\n    Pantone LLC (https://www.pantone.com), a division of X-Rite, a Danaher company\n  ',
