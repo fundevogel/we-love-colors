@@ -13,7 +13,7 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
 from palette import Palette
-from helpers.helpers import natural_sort
+from lib.helpers.nat_sort import natural_sort
 
 
 class Pantone(Palette):
