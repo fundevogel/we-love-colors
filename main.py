@@ -20,6 +20,8 @@ CONTEXT_SETTINGS = dict(
 
 
 class_map = {
+    'pantone': Pantone,
+    'ral': RAL,
     'dulux': Dulux,
     'copic': Copic,
     'prismacolor': Prismacolor,
@@ -61,15 +63,14 @@ def fetch(sets, fetch_all):
 
 @cli.command()
 @click.argument('sets', nargs=-1)
-@click.option('--all', 'process_all', flag_value=True, help='Process all available color sets & generate color palettes.')
-def process(sets, process_all):
+def process(sets):
     """
     ARGS:
     pantone | ral | dulux | copic | prismacolor
     """
     valid_sets = list(class_map.keys())
 
-    if process_all == True:
+    if len(sets) == 0:
         sets = valid_sets
 
     for set in sets:
