@@ -12,8 +12,8 @@ import json
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
-from palette import Palette
-from lib.helpers.nat_sort import natural_sort
+from .palette import Palette
+from .helpers.nat_sort import natural_sort
 
 
 class Pantone(Palette):
