@@ -19,7 +19,6 @@ CONTEXT_SETTINGS = dict(
 )
 
 
-
 class_map = {
     'pantone': Pantone,
     'ral': RAL,
@@ -28,65 +27,67 @@ class_map = {
     'prismacolor': Prismacolor,
 }
 
+
 @click.group(context_settings=CONTEXT_SETTINGS)
 @click.version_option('1.0.0-beta.2', '-v', '--version')
 def cli():
     pass
 
+
 @cli.command()
-@click.argument('sets', nargs=-1)
-@click.option('--all', 'fetch_all', flag_value=True, help='Fetch all available color sets & save as JSON.')
-def fetch(sets, fetch_all):
+@click.argument('brands', nargs=-1)
+def fetch(brands):
     """
     ARGS:
     pantone | ral | dulux | copic | prismacolor
     """
-    valid_sets = list(class_map.keys())
+    all_sets = class_map.keys()
 
-    if fetch_all == True:
-        sets = valid_sets
+    if not brands:
+        brands = all_sets
 
-    for set in sets:
-        if set in valid_sets:
-            object = class_map[set]()
+    for brand in brands:
+        if brand in all_sets:
+            obj = class_map[brand]()
 
             try:
-                object.fetch_all()
-            except AttributeError:
-                object.fetch()
+                obj.fetch_all()
 
-            object.save()
-            object.create_json()
+            except AttributeError:
+                obj.fetch()
+
+            obj.save()
+            obj.create_json()
+
         else:
-            print('"' + set + '" isn\'t available. Please provide a valid color space,\nsuch as "pantone", "ral", "dulux", "copic" & "prismacolor".')
-            continue
+            click.echo('"{}" not found. Please provide a valid brand name.'.format(brand))
 
 
 @cli.command()
-@click.argument('sets', nargs=-1)
-@click.option('-f', '--format', type=click.Choice(['xml', 'gpl', 'acb', 'soc']), help='Only given format will be generated.')
-def process(sets, format=''):
+@click.argument('brands', nargs=-1)
+@click.option('-f', '--output-format', type=click.Choice(['xml', 'gpl', 'acb', 'soc']), help='Color palette format to be generated.')
+def process(brands, output_format):
     """
     ARGS:
     pantone | ral | dulux | copic | prismacolor
     """
-    valid_sets = list(class_map.keys())
+    all_sets = class_map.keys()
 
-    if len(sets) == 0:
-        sets = valid_sets
+    if not brands:
+        brands = all_sets
 
-    for set in sets:
-        if set in valid_sets:
-            object = class_map[set]()
+    for brand in brands:
+        if brand in all_sets:
+            obj = class_map[brand]()
 
-            if format != '':
-                make_palette = getattr(object, 'make_' + format, None)
-                make_palette()
+            if output_format:
+                getattr(obj, 'make_' + output_format, None)()
+
             else:
-                object.make_palettes()
+                obj.make_palettes()
+
         else:
-            print('"' + set + '" isn\'t available. Please provide a valid color space,\nsuch as "pantone", "ral", "dulux", "copic" & "prismacolor".')
-            continue
+            click.echo('"{}" not found. Please provide a valid brand name.'.format(brand))
 
 
 if __name__ == '__main__':
