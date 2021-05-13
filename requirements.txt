@@ -1,6 +1,0 @@
-beautifulsoup4==4.9.3
-bs4==0.0.1
-click==8.0.0
-lxml==4.6.3
-Pillow==8.2.0
-soupsieve==2.2.1

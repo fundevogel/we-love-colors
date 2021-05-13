@@ -12,7 +12,7 @@ import json
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
-from palette import Palette
+from .palette import Palette
 
 
 class Prismacolor(Palette):

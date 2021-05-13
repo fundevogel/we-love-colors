@@ -35,8 +35,8 @@ It's as easy as `pip install -r requirements.txt`, but you might want to make su
 Fetching color sets and processing them is really straightforward - for everything else, there's  `--help`:
 
 ```bash
-$ python main.py
-Usage: main.py [OPTIONS] COMMAND [ARGS]...
+$ colors
+Usage: colors [OPTIONS] COMMAND [ARGS]...
 
 Options:
   -v, --version  Show the version and exit.
@@ -51,10 +51,10 @@ Using its commands `fetch` and `process` is fairly easy, like that:
 
 ```bash
 # Example 1 - Gotta fetch 'em `--all`:
-$ python main.py fetch --all && python main.py process
+$ colors fetch --all && colors process
 
 # Example 2 - Fetching specific sets & processing them:
-$ python main.py fetch copic dulux && python main.py process copic dulux
+$ colors fetch copic dulux && colors process copic dulux
 ```
 
 ### FAQ

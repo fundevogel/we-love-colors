@@ -7,11 +7,11 @@
 
 import click
 
-from lib.pantone import Pantone
-from lib.ral import RAL
-from lib.dulux import Dulux
-from lib.copic import Copic
-from lib.prismacolor import Prismacolor
+from .pantone import Pantone
+from .ral import RAL
+from .dulux import Dulux
+from .copic import Copic
+from .prismacolor import Prismacolor
 
 
 CONTEXT_SETTINGS = dict(
@@ -88,7 +88,3 @@ def process(brands, output_format):
 
         else:
             click.echo('"{}" not found. Please provide a valid brand name.'.format(brand))
-
-
-if __name__ == '__main__':
-    cli()

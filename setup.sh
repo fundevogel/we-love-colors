@@ -6,7 +6,7 @@ virtualenv -p python3 .env
 source .env/bin/activate
 
 # Installing dependencies
-pip install -r requirements.txt
+pip install --editable .
 
 # Creating directory structure
 cd palettes || exit
