@@ -13,7 +13,7 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 from PIL import ImageFile
 
-from palette import Palette
+from .palette import Palette
 
 
 class RAL(Palette):
