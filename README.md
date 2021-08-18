@@ -1,4 +1,5 @@
 # We love colors!
+
 This library provides an easy way to generate [*color palettes*](https://www.etymonline.com/search?q=Palette):
 
 > In computer graphics, a palette is a finite set of colors.
@@ -10,6 +11,7 @@ This library provides an easy way to generate [*color palettes*](https://www.ety
 > — [Adobe Illustrator](https://helpx.adobe.com/illustrator/using/using-creating-swatches.html)
 
 .. featuring the following (proprietary) color spaces:
+
 - [PANTONE®](https://www.pantone.com)
 - [RAL®](https://www.ral-farben.de)
 - [Dulux®](https://www.dulux.com.au)
@@ -17,21 +19,20 @@ This library provides an easy way to generate [*color palettes*](https://www.ety
 - [Prismacolor®](https://www.prismacolor.com)
 
 For now, `we-love-colors` creates master palettes for use in
+
 - [Scribus](https://www.scribus.net) (XML)
 - [GIMP](https://www.gimp.org) and [Inkscape](https://inkscape.org) (GPL)
 - [AutoCAD](https://www.autodesk.com/products/autocad) (ACB)
 - [LibreOffice](https://www.libreoffice.org) (SOC)
 
+
 ## Getting started
-Depending on your setup you might prefer a ..
 
-### Local installation via `virtualenv`
-Running `setup.sh` will install all dependencies inside a virtual environment, ready for action.
+Running `setup.sh` will install all dependencies inside a virtual environment, ready for action. Have a look first so you know what's going on ;)
 
-### Global installation via `requirements.txt`
-It's as easy as `pip install -r requirements.txt`, but you might want to make sure that Python v3 is installed on your system.
 
 ## Usage
+
 Fetching color sets and processing them is really straightforward - for everything else, there's  `--help`:
 
 ```bash
@@ -57,7 +58,8 @@ $ colors fetch --all && colors process
 $ colors fetch copic dulux && colors process copic dulux
 ```
 
-### FAQ
+## FAQ
+
 **Q: But where do all those files go?**
 **A:** That depends, ..
 - .. `.xml` files may be loaded individually with `Edit - Colours & Fills - Solid Colours - Import` (Scribus)
@@ -72,13 +74,16 @@ $ colors fetch copic dulux && colors process copic dulux
 
 
 ## Color samples
+
 If you are looking for a quick way to browse PANTONE® colors, check out the [Pantone Finder](https://github.com/picorana/Pantone_finder) package or [visit their website](https://picorana.github.io/Pantone_finder) to get started.
 
 For all included colors, there are preview files, to be found in the `examples` folder: Open up `index.html`, generated with `examples.py` (for its PHP version, just `php -S localhost:8000`).
 
 When clicking a color tile, its hex value is copied to your clipboard - brought to you by [clipboard.js](https://github.com/zenorocha/clipboard.js).
 
+
 ## Copyright
+
 Whenever mentioned throughout this project, PANTONE® and related trademarks are the property of [Pantone LLC](https://www.pantone.com), a division of [X-Rite](https://www.xrite.com), a [Danaher](https://www.danaher.com) company.
 
 The same applies to ..
@@ -89,7 +94,9 @@ The same applies to ..
 
 We assume neither ownership nor intellectual property of any kind - color codes (and names), sRGB and/or hexadecimal values are publically available on (one of) their respective websites.
 
+
 ## Similar projects
+
 - For Scribus, there's also the (currently unmaintained) package [`SwatchBooker`](http://www.selapa.net/swatchbooker)
 
 
