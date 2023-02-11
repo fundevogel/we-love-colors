@@ -1,0 +1,59 @@
+---
+ci:
+  autoupdate_schedule: quarterly
+
+# See https://pre-commit.com/hooks.html for info on hooks
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.1.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-ast
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: check-toml
+      - id: check-yaml
+      - id: debug-statements
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: forbid-new-submodules
+      - id: trailing-whitespace
+
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.4
+    hooks:
+      - id: bandit
+        name: Scanning for vulnerabilities
+        args: [
+            '--exclude=tests',
+            '--skip=B311',
+        ]
+
+  - repo: https://github.com/psf/black
+    rev: 22.10.0
+    hooks:
+      - id: black
+
+  - repo: local
+    hooks:
+      - id: pylint
+        name: Linting files
+        entry: pylint
+        language: system
+        types: [python]
+        require_serial: true
+        args: [
+            "--ignore-paths=tests",
+            "--output-format=colorized",
+        ]
+
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.10.1
+    hooks:
+      - id: isort
+
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v2.31.0
+    hooks:
+      - id: pyupgrade
+        args: [--py38-plus]
