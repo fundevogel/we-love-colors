@@ -1,19 +1,21 @@
-# EditorConfig is awesome: https://EditorConfig.org
+# For more information,
+# see https://editorconfig.org
 
-# top-most EditorConfig file
 root = true
 
-# Unix-style newlines with a newline ending every file
 [*]
-end_of_line = lf
-insert_final_newline = true
-
-# Matches multiple files with brace expansion notation
-# Set default charset
-[*.{php,py}]
 charset = utf-8
-
-# 4 space indentation
-[*.py]
-indent_style = space
+end_of_line = lf
 indent_size = 4
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.py]
+max_line_length = 88
+
+[*.toml|*.ya?ml]
+indent_size = 2

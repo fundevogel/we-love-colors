@@ -1,0 +1,118 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "we-love-colors"
+version = "1.1.0"
+description = "PANTONE®, RAL®, Dulux®, Copic® and Prismacolor® color palettes for Scribus, GIMP & Inkscape, the Python way"
+license = "MIT"
+authors = ["Fundevogel <maschinenraum@fundevogel.de>"]
+maintainers = ["Martin Folkers <hello@twobrain.io>"]
+readme = "README.md"
+homepage = "https://fundevogel.de"
+repository = "https://codeberg.org/fundevogel/we-love-colors"
+keywords = [
+    "colors",
+    "copic",
+    "dulux",
+    "gimp",
+    "inkscape",
+    "pantone",
+    "prismacolor",
+    "ral",
+    "scribus",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Environment :: Web Environment",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: SQL",
+    "Topic :: Database",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+packages = [{include = "colors", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+beautifulsoup4 = "^4"
+click = "^8"
+lxml = "^4"
+pillow = "^9"
+
+[tool.poetry.group.dev.dependencies]
+# Testing
+bandit = "^1"
+black = "^22"
+invoke = "^1"
+isort = "^5"
+pylint = "^2"
+pytest = "^7"
+pytest-cov = "^4"
+pytest-sugar = "^0.9"
+tox = "^3"
+tox-pyenv = "^1"
+
+# Packages
+aiofiles = "^22"
+aiohttp = "^3"
+beautifulsoup4 = "^4"
+click = "^8"
+lxml = "^4"
+pillow = "^9"
+
+[tool.poetry.urls]
+"Funding" = "https://donate.rsf.org"
+"Issue Tracker" = "https://codeberg.org/fundevogel/we-love-colors/issues"
+
+[tool.poetry.scripts]
+colors = "colors.cli:cli"
+
+[tool.bandit]
+exclude_dirs = ["tests"]
+# Disable rule 'random'
+skips = ["B311"]
+
+[tool.black]
+line-length = 88
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+force_sort_within_sections = true
+
+[tool.pylint.'MESSAGES CONTROL']
+max-line-length = 88
+# Disable rule 'logging-not-lazy', since it conflicts with
+# Conflicts with 'logging-fstring-interpolation' (rule 'W1201')
+disable = ["W1203"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+isolated_build = True
+envlist = py{38,39,310,311}
+
+[testenv]
+description = Run tests using 'pytest'
+deps =
+    pytest
+    aiofiles
+    aiohttp
+    beautifulsoup4
+    click
+    lxml
+    pillow
+commands = pytest
+"""
