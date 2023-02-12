@@ -1,22 +1,18 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
-##
-# Imports
-# For more information, see https://www.python.org/dev/peps/pep-0008/#imports
-##
-
 import json
 import os
 from urllib.request import urlopen
 
 from bs4 import BeautifulSoup
 
-from .helpers.nat_sort import natural_sort
+from ..utils import natural_sort
 from .palette import Palette
 
 
 class Pantone(Palette):
+    """
+    Holds PANTONE® utilities
+    """
+
     # Dictionary holding fetched colors (raw)
     sets = {
         "graphic-design": [],

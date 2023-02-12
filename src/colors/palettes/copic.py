@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
-##
-# Imports
-# For more information, see https://www.python.org/dev/peps/pep-0008/#imports
-##
-
 import json
 import os
 from urllib.request import urlopen
@@ -16,6 +8,10 @@ from .palette import Palette
 
 
 class Copic(Palette):
+    """
+    Holds Copic® utilities
+    """
+
     # Dictionary holding fetched colors
     sets = {"copic": []}
 
@@ -37,7 +33,7 @@ class Copic(Palette):
     # Valid `set_name` parameter:
     # - 'copic', currently 289 colors
     ##
-    def fetch(self, set_name="copic"):
+    def fetch(self, set_name: str = "copic"):
         # One baseURL to rule them all
         base_url = "https://www.copicmarker.com/collections/collect"
 
