@@ -9,7 +9,6 @@ from .pantone import Pantone
 from .prismacolor import Prismacolor
 from .ral import RAL
 
-
 PALETTES = {
     "pantone": Pantone,
     "ral": RAL,
@@ -21,7 +20,6 @@ PALETTES = {
 __all__ = [
     # Collection
     "PALETTES",
-
     # Single palettes
     "Copic",
     "Dulux",

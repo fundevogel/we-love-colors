@@ -219,7 +219,9 @@ class Pantone(Palette):
             "16-1546",  # 2019: Living Coral
         ]
 
-        with open(self.json_path + "/" + input_filename + ".json", "r") as file:
+        with open(
+            self.json_path + "/" + input_filename + ".json", "r", encoding="utf-8"
+        ) as file:
             data = json.load(file)
 
         # Looping through PANTONE® color sets
@@ -322,7 +324,7 @@ class Pantone(Palette):
                 )
 
                 # Dumping Pantone® color sets
-                with open(json_path, "w") as file:
+                with open(json_path, "w", encoding="utf-8") as file:
                     file.write(json.dumps(colors, indent=4))
 
                 print("Generating %s .. done" % json_path)

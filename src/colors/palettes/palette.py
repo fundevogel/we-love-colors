@@ -33,7 +33,7 @@ class Palette:
 
         json_path = self.json_path + "/" + output_filename + ".json"
 
-        with open(json_path, "w") as file:
+        with open(json_path, "w", encoding="utf-8") as file:
             file.write(json.dumps(self.sets, indent=4))
 
         print('Saving "' + json_path + '" .. done')
@@ -45,7 +45,9 @@ class Palette:
         if input_filename == "":
             input_filename = self.identifier
 
-        with open(self.json_path + "/" + input_filename + ".json", "r") as file:
+        with open(
+            self.json_path + "/" + input_filename + ".json", "r", encoding="utf-8"
+        ) as file:
             data = json.load(file)
 
         for set, colors in data.items():
@@ -59,7 +61,7 @@ class Palette:
             json_path = file_path + "/" + set + "_" + str(len(colors)) + "-colors.json"
 
             # Dumps color sets as JSON
-            with open(json_path, "w") as file:
+            with open(json_path, "w", encoding="utf-8") as file:
                 file.write(json.dumps(colors, indent=4))
 
             print("Generating %s .. done" % json_path)
@@ -86,7 +88,7 @@ class Palette:
             )
             root.insert(0, comment)
 
-            with open(path, "r") as file:
+            with open(path, "r", encoding="utf-8") as file:
                 data = json.load(file)
 
             for color in data:
@@ -118,14 +120,14 @@ class Palette:
             file_name = os.path.basename(path).replace(".json", "")
             gpl_file = output_path + "/" + file_name + ".gpl"
 
-            with open(path, "r") as file:
+            with open(path, "r", encoding="utf-8") as file:
                 data = json.load(file)
 
             # Creating directories for GPL color palettes (if it doesn't exist already)
             os.makedirs(output_path, exist_ok=True)
 
             # Writing GPL color palettes to disk (mirroring JSON source structure)
-            with open(gpl_file, "w") as file:
+            with open(gpl_file, "w", encoding="utf-8") as file:
                 title = (
                     file_name.title()
                     if self.identifier != "pantone"
@@ -134,8 +136,7 @@ class Palette:
 
                 file.write("GIMP Palette\n")
                 file.write("Name: " + title + "\n")
-                file.write(self.copyright.get("xml", self.default_copyright["xml"]))
-                file.write("\n")
+                file.write(self.copyright.get("gpl", self.default_copyright["gpl"]))
 
                 for color in data:
                     name = (
@@ -184,7 +185,7 @@ class Palette:
                 entry = etree.SubElement(rgb8, color)
                 entry.text = value
 
-            with open(path, "r") as file:
+            with open(path, "r", encoding="utf-8") as file:
                 data = json.load(file)
 
             for color in data:
@@ -246,7 +247,7 @@ class Palette:
             )
             root.insert(0, comment)
 
-            with open(path, "r") as file:
+            with open(path, "r", encoding="utf-8") as file:
                 data = json.load(file)
 
             for color in data:
@@ -265,14 +266,14 @@ class Palette:
                 soc_file, xml_declaration=True, encoding="UTF-8", pretty_print=True
             )
 
-            with open(soc_file, "r") as input:
+            with open(soc_file, "r", encoding="utf-8") as input:
                 data = input.read()
                 data = data.replace("color-table", "office:color-table")
                 data = data.replace("<color", "<draw:color")
                 data = data.replace("name=", "draw:name=")
                 data = data.replace("color=", "draw:color=")
 
-            with open(soc_file, "w") as output:
+            with open(soc_file, "w", encoding="utf-8") as output:
                 output.write(data)
 
             print("Generating %s .. done" % soc_file)
