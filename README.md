@@ -51,10 +51,10 @@ Commands:
 Using its commands `fetch` and `process` is fairly easy, like that:
 
 ```bash
-# Example 1 - Gotta fetch 'em `--all`:
-$ colors fetch --all && colors process
+# Example 1 - Gotta fetch 'em `all`:
+$ colors fetch && colors process
 
-# Example 2 - Fetching specific sets & processing them:
+# Example 2 - Obtain & process specific sets:
 $ colors fetch copic dulux && colors process copic dulux
 ```
 
