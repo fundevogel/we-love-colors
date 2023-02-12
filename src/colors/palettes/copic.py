@@ -1,8 +1,5 @@
 import json
 import os
-from urllib.request import urlopen
-
-from bs4 import BeautifulSoup
 
 from .palette import Palette
 
@@ -35,11 +32,10 @@ class Copic(Palette):
     ##
     def fetch(self, set_name: str = "copic"):
         # One baseURL to rule them all
-        base_url = "https://www.copicmarker.com/collections/collect"
+        base_url = "https://copic.de/copic-classic-farb/bestellraster"
 
         # Scraping Copic® colors from HTML
-        html = urlopen(base_url)
-        soup = BeautifulSoup(html, "lxml")
+        soup = self.get_html(base_url)
 
         for color_tile in soup.find(
             "div", {"class": "collection-color--desktop"}

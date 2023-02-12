@@ -1,8 +1,5 @@
 import json
 import os
-from urllib.request import urlopen
-
-from bs4 import BeautifulSoup
 
 from ..utils import natural_sort
 from .palette import Palette
@@ -53,8 +50,7 @@ class Pantone(Palette):
 
         # Looping through URLs & scraping color information from HTML tables
         for i in range(firstPage, lastPage + 1):
-            html = urlopen(base_url + set_url.get(set_name) + str(i))
-            soup = BeautifulSoup(html, "lxml")
+            soup = self.get_html(base_url + set_url.get(set_name) + str(i))
 
             print("Loading page " + str(i) + " .. done")
 

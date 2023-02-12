@@ -1,14 +1,36 @@
 import glob
 import json
 import os
+import random
+from typing import List
 
+import bs4
 from lxml import etree
+import requests
 
 
 class Palette:
     """
     Holds basic palette utilities
     """
+
+    # UA strings
+    ua: List[str] = [
+        # Firefox
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome"
+        + "/51.0.2704.103 Safari/537.36",
+        # Opera
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome"
+        + "/51.0.2704.106 Safari/537.36 OPR/38.0.2220.41",
+        # Safari
+        "Mozilla/5.0 (iPhone; CPU iPhone OS 13_5_1 like Mac OS X) AppleWebKit/605.1.15"
+        + " (KHTML, like Gecko) Version/13.1.1 Mobile/15E148 Safari/604.1",
+        # Internet Explorer
+        "Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobil"
+        + "e/9.0)",
+        # Google
+        "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+    ]
 
     def __init__(self):
         # Copyright notices
@@ -23,6 +45,35 @@ class Palette:
 
         # Globbing all JSON source files
         self.json_files = glob.glob(self.json_path + "/*/*.json", recursive=True)
+
+    def get_html(self, url: str) -> str:
+        """
+        Fetches HTML for given URL
+
+        :param url: str Target URL
+        :return: str Source HTML
+        """
+
+        # Open HTTP session
+        with requests.Session() as session:
+            # Set headers (using random UA)
+            session.headers = {"User-Agent": random.choice(self.ua)}
+
+            # Attempt to ..
+            try:
+                # .. fetch URL contents
+                response = session.get(url, timeout=10)
+
+                # Unless HTTP status indicates problem ..
+                response.raise_for_status()
+
+                # .. provide HTML text
+                return bs4.BeautifulSoup(response.text, "lxml")
+
+            # .. otherwise ..
+            except requests.exceptions.HTTPError:
+                # .. provide empty results
+                return bs4.BeautifulSoup("", "lxml")
 
     ##
     # Dumps fetched colors as JSON
