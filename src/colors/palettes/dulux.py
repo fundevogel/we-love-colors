@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
-##
-# Imports
-# For more information, see https://www.python.org/dev/peps/pep-0008/#imports
-##
-
 import json
 import os
 from urllib.request import urlopen
@@ -16,6 +8,10 @@ from .palette import Palette
 
 
 class Dulux(Palette):
+    """
+    Holds Dulux® utilities
+    """
+
     # Dictionary holding fetched colors
     sets = {"dulux": []}
 
@@ -36,7 +32,7 @@ class Dulux(Palette):
     # Valid `set_name` parameter:
     # - 'dulux', currently 1768 colors
     ##
-    def fetch(self, set_name="dulux"):
+    def fetch(self, set_name: str = "dulux"):
         # One baseURL to rule them all
         base_url = "https://colour.dulux.ca/all-colors"
 

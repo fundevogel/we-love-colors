@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
-##
-# Imports
-# For more information, see https://www.python.org/dev/peps/pep-0008/#imports
-##
-
 import json
 import os
 from urllib.request import urlopen
@@ -16,6 +8,10 @@ from .palette import Palette
 
 
 class Prismacolor(Palette):
+    """
+    Holds Prismacolor® utilities
+    """
+
     # Dictionary holding fetched colors
     sets = {"premier": []}
 
@@ -37,7 +33,7 @@ class Prismacolor(Palette):
     # Valid `set_name` parameter:
     # - 'premier', currently 150 colors
     ##
-    def fetch(self, set_name="premier"):
+    def fetch(self, set_name: str = "premier"):
         # One baseURL to rule them all
         base_url = (
             "https://kredki.eu/pl/p/Prismacolor-Colored-Pencils-Kredki-Art-150-Kol/75"

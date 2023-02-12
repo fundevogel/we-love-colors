@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
-##
-# Imports
-# For more information, see https://www.python.org/dev/peps/pep-0008/#imports
-##
-
 import json
 import os
 from urllib.request import urlopen
@@ -17,6 +9,10 @@ from .palette import Palette
 
 
 class RAL(Palette):
+    """
+    Holds RAL® utilities
+    """
+
     # Dictionary holding fetched colors
     sets = {
         "classic": [],

@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
-##
-# Imports
-# For more information, see https://www.python.org/dev/peps/pep-0008/#imports
-##
-
 import glob
 import json
 import os
@@ -14,6 +6,10 @@ from lxml import etree
 
 
 class Palette:
+    """
+    Holds basic palette utilities
+    """
+
     def __init__(self):
         # Copyright notices
         self.default_copyright = {

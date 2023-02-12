@@ -1,30 +1,10 @@
-#!/usr/bin/env python3
-
-##
-# IMPORTS
-# For more information, see https://www.python.org/dev/peps/pep-0008/#imports
-##
-
 import click
 
-from .copic import Copic
-from .dulux import Dulux
-from .pantone import Pantone
-from .prismacolor import Prismacolor
-from .ral import RAL
-
-CONTEXT_SETTINGS = dict(
-    help_option_names=["-h", "--help"],
-)
+from .palettes import PALETTES
 
 
-class_map = {
-    "pantone": Pantone,
-    "ral": RAL,
-    "dulux": Dulux,
-    "copic": Copic,
-    "prismacolor": Prismacolor,
-}
+# Add shorthand to 'help' parameter
+CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
 
 @click.group(context_settings=CONTEXT_SETTINGS)
@@ -40,14 +20,15 @@ def fetch(brands):
     ARGS:
     pantone | ral | dulux | copic | prismacolor
     """
-    all_sets = class_map.keys()
+
+    all_sets = PALETTES.keys()
 
     if not brands:
         brands = all_sets
 
     for brand in brands:
         if brand in all_sets:
-            obj = class_map[brand]()
+            obj = PALETTES[brand]()
 
             try:
                 obj.fetch_all()
@@ -59,9 +40,7 @@ def fetch(brands):
             obj.create_json()
 
         else:
-            click.echo(
-                '"{}" not found. Please provide a valid brand name.'.format(brand)
-            )
+            click.echo(f'"{brand}" not found. Please provide a valid brand name.')
 
 
 @cli.command()
@@ -77,14 +56,15 @@ def process(brands, output_format):
     ARGS:
     pantone | ral | dulux | copic | prismacolor
     """
-    all_sets = class_map.keys()
+
+    all_sets = PALETTES.keys()
 
     if not brands:
         brands = all_sets
 
     for brand in brands:
         if brand in all_sets:
-            obj = class_map[brand]()
+            obj = PALETTES[brand]()
 
             if output_format:
                 getattr(obj, "make_" + output_format, None)()
