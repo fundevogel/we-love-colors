@@ -1,9 +1,7 @@
 import json
 import os
-from urllib.request import urlopen
 
 from PIL import ImageFile
-from bs4 import BeautifulSoup
 
 from .palette import Palette
 
@@ -57,8 +55,7 @@ class RAL(Palette):
         )
 
         # Scraping RAL® colors from HTML
-        html = urlopen(base_url)
-        soup = BeautifulSoup(html, "lxml")
+        soup = self.get_html(base_url)
         color_grids = soup.find_all("ul", {"class": "color-grid"})
 
         for set_count, color_grid in enumerate(color_grids, 1):
@@ -85,6 +82,7 @@ class RAL(Palette):
                 )
                 image = urlopen(imageUrl)
                 parser = ImageFile.Parser()
+
                 while 1:
                     s = image.read(1024)
                     if not s:

@@ -1,8 +1,5 @@
 import json
 import os
-from urllib.request import urlopen
-
-from bs4 import BeautifulSoup
 
 from .palette import Palette
 
@@ -40,8 +37,7 @@ class Prismacolor(Palette):
         )
 
         # Scraping Prismacolor® colors from HTML
-        html = urlopen(base_url)
-        soup = BeautifulSoup(html, "lxml")
+        soup = self.get_html(base_url)
 
         for list_element in soup.find("div", {"class": "resetcss"}).findAll("li")[1:]:
             color_list = []

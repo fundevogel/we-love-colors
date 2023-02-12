@@ -1,8 +1,5 @@
 import json
 import os
-from urllib.request import urlopen
-
-from bs4 import BeautifulSoup
 
 from .palette import Palette
 
@@ -37,8 +34,7 @@ class Dulux(Palette):
         base_url = "https://colour.dulux.ca/all-colors"
 
         # Scraping Dulux® colors from HTML
-        html = urlopen(base_url)
-        soup = BeautifulSoup(html, "lxml")
+        soup = self.get_html(base_url)
 
         for color_tile in soup.find_all("a", {"class": "all-color-tile"}):
             rgb_string = color_tile.get("style")[17:].replace(", ", ",")
