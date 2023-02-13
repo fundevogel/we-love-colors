@@ -1,14 +1,23 @@
-import json
-import os
+"""
+This module is part of the 'we-love-colors' package,
+which is released under MIT license.
+"""
 
+import json
+import pathlib
+from typing import Dict, List, Optional
+
+from ..palette import Palette
 from ..utils import natural_sort
-from .palette import Palette
 
 
 class Pantone(Palette):
     """
     Holds PANTONE® utilities
     """
+
+    # Identifier
+    identifier = "pantone"
 
     # Dictionary holding fetched colors (raw)
     sets = {
@@ -17,79 +26,87 @@ class Pantone(Palette):
         "product-design": [],
     }
 
-    # Identifier
-    identifier = "pantone"
-
     # Copyright notices
-    copyright = {
-        "xml": "\n    PANTONE® and related trademarks are the property of\n    Pantone LLC (https://www.pantone.com), a division of X-Rite, a Danaher company\n  ",
-        "gpl": "##\n# PANTONE® and related trademarks are the property of\n# Pantone LLC (https://www.pantone.com), a division of X-Rite, a Danaher company\n##\n",
+    copyright_notices = {
+        "xml": "\n    PANTONE® and related trademarks are the property of\n    "
+        + "Pantone LLC (https://www.pantone.com), a division of X-Rite, "
+        + "a Danaher company\n  ",
+        "gpl": "##\n# PANTONE® and related trademarks are the property of\n"
+        + "# Pantone LLC (https://www.pantone.com), a division of X-Rite, "
+        + "a Danaher company\n##\n",
     }
 
-    def __init__(self):
-        super().__init__()
+    def fetch_colors(self) -> None:
+        """
+        Fetches all PANTONE® colors at once
 
-    ##
-    # Fetches PANTONE® colors
-    #
-    # Valid `set_name` parameter:
-    # - 'graphic-design', currently 15870 colors (pp 1-32)
-    # - 'fashion-design', currently 2443 colors (pp 1-14)
-    # - 'product-design', currently 4967 colors (pp 1-10)
-    ##
-    def fetch(self, set_name, firstPage, lastPage):
-        # One baseURL to rule them all
-        base_url = "https://www.numerosamente.it/pantone-list/"
+        Available sets:
+          - 'graphic-design' (currently 15870 colors), pp 1-32
+          - 'fashion-design' (currently 2443 colors), pp 1-14
+          - 'product-design' (currently 4967 colors), pp 1-10
 
-        # Translating set_name to valid URL path name via `dict.get()`
+        :return: None
+        """
+
+        self.fetch("graphic-design", 1, 32)
+        self.fetch("fashion-design", 1, 14)
+        self.fetch("product-design", 1, 10)
+
+    def fetch(self, set_name: str, first_page: int, last_page: int) -> None:
+        """
+        Fetches PANTONE® colors
+
+        :param set_name: str Name of color set
+        :param first_page: int Number of first page
+        :param last_page: int Number of last page
+        :return: None
+        """
+
+        # One URL to rule them all
+        base_url = "https://www.numerosamente.it/pantone-list"
+
+        # Map base color sets to their corresponding URL parts
         set_url = {
-            "graphic-design": "graphic-designers/",
-            "fashion-design": "fashion-and-interior-designers/",
-            "product-design": "industrial-designers/",
+            "graphic-design": "graphic-designers",
+            "fashion-design": "fashion-and-interior-designers",
+            "product-design": "industrial-designers",
         }
 
         # Looping through URLs & scraping color information from HTML tables
-        for i in range(firstPage, lastPage + 1):
-            soup = self.get_html(base_url + set_url.get(set_name) + str(i))
+        for i in range(first_page, last_page + 1):
+            soup = self.get_html(f'{base_url}/{set_url["set_name"]}/{i}')
 
-            print("Loading page " + str(i) + " .. done")
+            print(f"Loading page {i} .. done")
 
-            for remoteElement in soup.findAll("tr")[1:]:
+            for remote_element in soup.findAll("tr")[1:]:
                 color = {}
-                color["code"] = remoteElement.findAll("td")[0].text
-                color["rgb"] = remoteElement.findAll("td")[1].text
-                color["hex"] = remoteElement.findAll("td")[2].text
-                color["name"] = remoteElement.findAll("td")[3].text
+                color["code"] = remote_element.findAll("td")[0].text
+                color["rgb"] = remote_element.findAll("td")[1].text
+                color["hex"] = remote_element.findAll("td")[2].text
+                color["name"] = remote_element.findAll("td")[3].text
 
                 # Checking if a fetched element already exists ..
                 found_same_name = False
-                for localElement in self.sets[set_name]:
-                    if color["name"] != "" and color["name"] == localElement["name"]:
+
+                for local_element in self.sets[set_name]:
+                    if color["name"] and color["name"] == local_element["name"]:
                         found_same_name = True
 
                 # .. if not, adding it is da real MVP
                 if not found_same_name:
                     self.sets[set_name].append(color)
 
-                print("Loading " + color["code"] + ' in set "' + set_name + '" .. done')
+                print(f'Loading {color["code"]} in set "{set_name}" .. done')
 
-    ##
-    # Fetches all PANTONE® colors at once
-    ##
-    def fetch_all(self):
-        self.fetch("graphic-design", 1, 32)
-        self.fetch("fashion-design", 1, 14)
-        self.fetch("product-design", 1, 10)
+    def extract_subsets(self) -> Dict[str, List[Dict[str, str]]]:
+        """
+        Extracts color subsets
 
-    ##
-    # Creates JSON files for Dulux® color sets
-    ##
-    def create_json(self, input_filename=""):
-        if input_filename == "":
-            input_filename = self.identifier
+        :return: None
+        """
 
         # Dictionary holding fetched colors (processed)
-        sets_processed = {
+        data = {
             ##
             # Pantone Color Systems - Graphics
             # Pantone Matching System - PMS
@@ -97,7 +114,7 @@ class Pantone(Palette):
             # or visit their shop: https://www.pantone.com/graphics
             ##
             "graphic-design": {
-                # TODO: Solid/Spot Colors (Coated & Uncoated) - Link?
+                # NOTE: Solid/Spot Colors (Coated & Uncoated) - Link?
                 "C": [],
                 "U": [],
                 ##
@@ -140,11 +157,11 @@ class Pantone(Palette):
             # or visit their shop: https://www.pantone.com/fashion-home-interiors
             ##
             "fashion-design": {
-                # TODO: 'Textile Paper eXtended'
+                # NOTE: 'Textile Paper eXtended'
                 "TPX": [],
-                # TODO: 'Textile Paper Green'
+                # NOTE: 'Textile Paper Green'
                 "TPG": [],
-                # TODO: 'Textile Cotton eXtended'
+                # NOTE: 'Textile Cotton eXtended'
                 "TCX": [],
                 ##
                 # Nylon Brights Set
@@ -165,7 +182,7 @@ class Pantone(Palette):
             ##
             "product-design": {
                 "PQ": [],  # https://www.pantone.com/color-intelligence/articles/technical/did-you-know-pantone-plastics-standards-explained
-                # TODO: 'Textile Cotton eXtended'
+                # NOTE: 'Textile Cotton eXtended'
                 "TCX": [],
             },
             "custom-palettes": {
@@ -215,29 +232,32 @@ class Pantone(Palette):
             "16-1546",  # 2019: Living Coral
         ]
 
-        with open(
-            self.json_path + "/" + input_filename + ".json", "r", encoding="utf-8"
-        ) as file:
-            data = json.load(file)
+        # # Build path to JSON file
+        # data_file = self.brand_path / f"{self.identifier}.json"
+
+        # with data_file.open("r", encoding="utf-8") as file:
+        #     data = json.load(file)
 
         # Looping through PANTONE® color sets
-        for set, colors in data.items():
-            subset = sets_processed[set]
+        for set_name, colors in self.sets.items():
+            subset = data[set_name]
 
-            # Extracting each PANTONE® color subset
-            for i, color in enumerate(colors):
+            # Extract each PANTONE® color subset
+            for color in colors:
                 code = color["code"]
 
                 if code[0:7] in colors_of_the_year:
                     code = code[0:7]
                     color["year"] = 2000 + colors_of_the_year.index(code)
-                    sets_processed["custom-palettes"]["color-of-the-year"].append(color)
+                    data["custom-palettes"]["color-of-the-year"].append(color)
 
                 if code[0:2] == "P ":
                     if code[-2:] == " C":
                         subset["PC"].append(color)
+
                     if code[-2:] == " U":
                         subset["PU"].append(color)
+
                 else:
                     if code[-2:] == " C":
                         if len(code) == 5:
@@ -246,22 +266,28 @@ class Pantone(Palette):
                             ):
                                 subset["NC"].append(color)
                                 continue
+
                             if "871 C" <= code <= "877 C":
                                 subset["MC"].append(color)
                                 continue
+
                         if len(code) == 6:
                             if "8001 C" <= code <= "8965 C":
                                 subset["MC"].append(color)
                                 continue
+
                             if ("9020 C" <= code <= "9603 C") or (
                                 code in base_pastels_coated
                             ):
                                 subset["PAC"].append(color)
                                 continue
+
                         if len(code) == 7 and ("10101 C" <= code <= "10399 C"):
                             subset["MC"].append(color)
                             continue
+
                         subset["C"].append(color)
+
                     if code[-2:] == " U":
                         if len(code) == 5:
                             if ("801 U" <= code <= "814 U") or (
@@ -269,58 +295,81 @@ class Pantone(Palette):
                             ):
                                 subset["NU"].append(color)
                                 continue
+
                             if "871 U" <= code <= "877 U":
-                                # TODO: There are no uncoated Metallics, deleting rather than skipping?
+                                # NOTE: There are no uncoated Metallics, deleting rather than skipping?
                                 continue
+
                         if (len(code) == 6 and ("9020 U" <= code <= "9603 U")) or (
                             code in base_pastels_uncoated
                         ):
                             subset["PAU"].append(color)
                             continue
+
                         subset["U"].append(color)
+
                 if code[-3:] == " CP":
                     subset["CP"].append(color)
+
                 if code[-3:] == " UP":
                     subset["UP"].append(color)
+
                 if code[-3:] == "XGC":
                     subset["XGC"].append(color)
+
                 if code[-3:] == "TCX":
                     subset["TCX"].append(color)
+
                 if code[-3:] == "TPG":
                     subset["TPG"].append(color)
+
                 if code[-3:] == "TPX":
                     subset["TPX"].append(color)
+
                 if code[-3:] == " TN":
                     subset["TN"].append(color)
+
                 if code[-3:] == " SP":
                     subset["SP"].append(color)
+
                 if code[0:3] == "PQ-":
                     subset["PQ"].append(color)
 
-        for set, subsets in sets_processed.items():
-            if len(subsets) == 0:
-                break
+        return data
 
-            # Creating subdirectories
-            file_path = self.json_path + "/" + set
-            os.makedirs(file_path, exist_ok=True)
+    def make_palettes(self, palette: Optional[str]) -> None:
+        """
+        Makes color palettes for one or all palette types
 
-            for subset, colors in subsets.items():
-                # Applying natural sort order to all PANTONE® 'Graphics' colors
-                if set == "graphic-design":
-                    natural_sort(colors, "code")
-                if set == "custom-palettes":
-                    colors.sort(key=lambda k: k["year"])
+        :param palette: str | None
+        :return: None
+        """
 
-                if subset == "color-of-the-year":
-                    subset = "CotY"
+        # Act normal, be cool
+        super().make_palettes(palette)
 
-                json_path = (
-                    file_path + "/" + subset + "_" + str(len(colors)) + "-colors.json"
-                )
+        # Iterate over color sets
+        for set_name, subsets in self.extract_subsets().items():
+            # Build & create path to color subsets
+            subsets_path = self.brand_path / "sets" / set_name
+            subsets_path.mkdir(parents=True, exist_ok=True)
 
-                # Dumping Pantone® color sets
-                with open(json_path, "w", encoding="utf-8") as file:
-                    file.write(json.dumps(colors, indent=4))
+            for dtype in ["acb", "gpl", "soc", "xml"]:
+                if palette is not None and dtype is not palette:
+                    continue
 
-                print("Generating %s .. done" % json_path)
+                # Iterate over color subsets
+                for subset_name, colors in subsets.items():
+                    # Apply natural sort order to all PANTONE® 'Graphics' colors
+                    if set_name == "graphic-design":
+                        natural_sort(colors, "code")
+
+                    if set_name == "custom-palettes":
+                        subset_name = "CotY"
+                        colors.sort(key=lambda k: k["year"])
+
+                    # Build path to palette file
+                    palette_file = subsets_path / f"{subset_name}.{dtype}"
+
+                    # Party time!
+                    getattr(self, f"make_{dtype}")(palette_file, colors)
