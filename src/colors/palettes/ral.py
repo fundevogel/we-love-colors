@@ -1,15 +1,23 @@
-import json
-import os
+"""
+This module is part of the 'we-love-colors' package,
+which is released under MIT license.
+"""
+
+from urllib.request import urlopen
 
 from PIL import ImageFile
 
-from .palette import Palette
+from ..palette import Palette
+from ..utils import rgb2hex
 
 
 class RAL(Palette):
     """
     Holds RAL® utilities
     """
+
+    # Identifier
+    identifier = "ral"
 
     # Dictionary holding fetched colors
     sets = {
@@ -25,43 +33,58 @@ class RAL(Palette):
         # }
     }
 
-    # Identifier
-    identifier = "ral"
-
     # Copyright notices
-    copyright = {
-        "xml": "\n    RAL® and related trademarks are the property of\n    RAL gGmbH (https://www.ral-farben.de) (non-profit LLC) or\n    RAL Deutsches Institut für Gütesicherung und Kennzeichnung e. V. (https://www.ral.de)\n  ",
-        "gpl": "##\n# RAL® and related trademarks are the property of\n# RAL gGmbH (https://www.ral-farben.de) (non-profit LLC) or\n# RAL Deutsches Institut für Gütesicherung und Kennzeichnung e. V. (https://www.ral.de)\n##\n",
+    copyright_notices = {
+        "xml": "\n    RAL® and related trademarks are the property of"
+        + "\n    RAL gGmbH (https://www.ral-farben.de) (non-profit LLC) or"
+        + "\n    RAL Deutsches Institut für Gütesicherung und Kennzeichnung "
+        + "e. V. (https://www.ral.de)\n  ",
+        "gpl": "##\n# RAL® and related trademarks are the property of"
+        + "\n# RAL gGmbH (https://www.ral-farben.de) (non-profit LLC) or\n"
+        + "# RAL Deutsches Institut für Gütesicherung und Kennzeichnung "
+        + "e. V. (https://www.ral.de)\n##\n",
     }
 
-    def __init__(self):
-        super().__init__()
+    def fetch_colors(self) -> None:
+        """
+        Fetches all RAL® colors at once
 
-    ##
-    # Fetches RAL® colors
-    #
-    # Valid `set_name` parameter:
-    # - 'classic',
-    # - 'design',
-    # - 'effect',
-    # - 'plastics'
-    ##
-    def fetch(self, set_name):
-        # One baseURL to rule them all
+        :return: None
+        """
+
+        self.fetch("classic")
+        self.fetch("design")
+        self.fetch("effect")
+        self.fetch("plastics")
+
+    def fetch(self, set_name: str) -> None:
+        """
+        Fetches RAL® colors
+
+        Available sets:
+          - 'classic'
+          - 'design'
+          - 'effect'
+          - 'plastics
+
+        :param set_name: str Name of color set
+        :return: None
+        """
+
+        # One URL to rule them all
         base_url = (
-            "https://www.ral-farben.de/content/anwendung-hilfe/all-ral-colours-names/overview-ral-"
-            + set_name
-            + "-colours.html"
+            "https://www.ral-farben.de/content/anwendung-hilfe/"
+            + f"all-ral-colours-names/overview-ral-{set_name}-colours.html"
         )
 
         # Scraping RAL® colors from HTML
         soup = self.get_html(base_url)
         color_grids = soup.find_all("ul", {"class": "color-grid"})
 
-        for set_count, color_grid in enumerate(color_grids, 1):
+        for index, color_grid in enumerate(color_grids, 1):
             list_elements = color_grid.findAll("li")
 
-            for i, list_element in enumerate(list_elements, 1):
+            for idx, list_element in enumerate(list_elements, 1):
                 list_element = list_element.text.splitlines()
 
                 # Parsing each RAL® color's background image, extracting RGB values
@@ -70,35 +93,31 @@ class RAL(Palette):
                 identifier = slug.get(set_name) if (set_name in slug) else set_name
 
                 if set_name == "plastics":
-                    identifier = set_name + "-p" + str(set_count)
+                    identifier = set_name + "-p" + str(index)
 
                 # See https://stackoverflow.com/a/2271015
-                imageUrl = (
+                image_url = (
                     "https://www.ral-farben.de/out/ralfarben/img/thumbs/"
-                    + identifier
-                    + "-"
-                    + str(i)
-                    + ".png"
+                    + f"{identifier}-{idx}.png"
                 )
-                image = urlopen(imageUrl)
+                image = urlopen(image_url)
                 parser = ImageFile.Parser()
 
-                while 1:
-                    s = image.read(1024)
-                    if not s:
-                        break
-                    parser.feed(s)
-                im = parser.close()
-                result = im.getpixel((0, 0))
-                rgb = [str(i) for i in result]
+                while True:
+                    chunk = image.read(1024)
 
-                # Converting to hexadecimal color code, see https://stackoverflow.com/a/3380739
-                hexadecimal = "#%02x%02x%02x" % result
+                    if not chunk:
+                        break
+
+                    parser.feed(chunk)
+
+                image = parser.close()
+                rgb_values = [str(i) for i in image.getpixel((0, 0))]
 
                 color = {}
                 color["code"] = list_element[1].strip()
-                color["rgb"] = "rgb(" + ",".join(rgb) + ")"
-                color["hex"] = hexadecimal.upper()
+                color["rgb"] = "rgb(" + ",".join(rgb_values) + ")"
+                color["hex"] = rgb2hex(rgb_values)
                 color["name"] = ""
 
                 if len(list_element) > 2:
@@ -111,13 +130,4 @@ class RAL(Palette):
                 else:
                     self.sets[identifier].append(color)
 
-                print("Loading " + color["code"] + ' in set "' + set_name + '" .. done')
-
-    ##
-    # Fetches all RAL® colors at once
-    ##
-    def fetch_all(self):
-        self.fetch("classic")
-        self.fetch("design")
-        self.fetch("effect")
-        self.fetch("plastics")
+                print(f'Loading {color["code"]} in set "{set_name}" .. done')

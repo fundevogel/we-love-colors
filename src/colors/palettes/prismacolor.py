@@ -1,7 +1,10 @@
-import json
-import os
+"""
+This module is part of the 'we-love-colors' package,
+which is released under MIT license.
+"""
 
-from .palette import Palette
+from ..palette import Palette
+from ..utils import rgb2hex
 
 
 class Prismacolor(Palette):
@@ -9,29 +12,36 @@ class Prismacolor(Palette):
     Holds Prismacolor® utilities
     """
 
-    # Dictionary holding fetched colors
-    sets = {"premier": []}
-
     # Identifier
     identifier = "prismacolor"
 
+    # Dictionary holding fetched colors
+    sets = {"premier": []}
+
     # Copyright notices
-    copyright = {
-        "xml": "\n    Prismacolor® and related trademarks are the property of\n    Berol Corporation (http://www.berol.co.uk), owned by Sanford L.P. (http://www.sanfordb2b.com),\n    a Newell Brands (https://www.newellbrands.com) company\n  ",
-        "gpl": "##\n# Prismacolor® and related trademarks are the property of\n# Berol Corporation (http://www.berol.co.uk), owned by Sanford L.P. (http://www.sanfordb2b.com),\n# a Newell Brands (https://www.newellbrands.com) company\n##\n",
+    copyright_notices = {
+        "xml": "\n    Prismacolor® and related trademarks are the property of\n    "
+        + "Berol Corporation (http://www.berol.co.uk), "
+        + "owned by Sanford L.P. (http://www.sanfordb2b.com),\n    "
+        + "a Newell Brands (https://www.newellbrands.com) company\n  ",
+        "gpl": "##\n# Prismacolor® and related trademarks are the property of\n"
+        + "# Berol Corporation (http://www.berol.co.uk), "
+        + "owned by Sanford L.P. (http://www.sanfordb2b.com),\n"
+        + "# a Newell Brands (https://www.newellbrands.com) company\n##\n",
     }
 
-    def __init__(self):
-        super().__init__()
+    def fetch_colors(self) -> None:
+        """
+        Fetches Prismacolor® colors
 
-    ##
-    # Fetches Prismacolor® colors
-    #
-    # Valid `set_name` parameter:
-    # - 'premier', currently 150 colors
-    ##
-    def fetch(self, set_name: str = "premier"):
-        # One baseURL to rule them all
+        Available sets:
+          - 'premier' (currently 150 colors)
+
+        :param set_name: str Name of color set
+        :return: None
+        """
+
+        # One URL to rule them all
         base_url = (
             "https://kredki.eu/pl/p/Prismacolor-Colored-Pencils-Kredki-Art-150-Kol/75"
         )
@@ -40,28 +50,21 @@ class Prismacolor(Palette):
         soup = self.get_html(base_url)
 
         for list_element in soup.find("div", {"class": "resetcss"}).findAll("li")[1:]:
-            color_list = []
-            line = list_element.text
-
+            # Create data array
             color = {}
 
-            if not line[0:2] == "PC":
+            if not list_element.text[0:2] == "PC":
                 continue
 
-            line = line.split(":")
-            code_name = line[0][0:-4].split(" ")
-            rgb_string = line[1][:-4].replace(", ", ",")
-            rgb_list = rgb_string.split(",")
-            rgb = [int(i) for i in rgb_list]
+            line = list_element.text.split(":")
+            data = line[0][0:-4].split(" ")
+            rgb_string = line[1][:-4].replace(" ", "")
 
-            # Converting to hexadecimal color code, see https://stackoverflow.com/a/3380739
-            hexadecimal = "#%02x%02x%02x" % tuple(rgb)
+            color["code"] = " ".join([data.pop(0), data.pop(0)])
+            color["rgb"] = "rgb(" + rgb_string + ")"
+            color["hex"] = rgb2hex(rgb_string)
+            color["name"] = " ".join(data)
 
-            color["code"] = " ".join([code_name.pop(0), code_name.pop(0)])
-            color["rgb"] = "rgb(" + rgb_string.strip() + ")"
-            color["hex"] = hexadecimal.upper()
-            color["name"] = " ".join(code_name)
+            self.sets["premier"].append(color)
 
-            self.sets[set_name].append(color)
-
-            print("Loading " + color["code"] + ' in set "' + set_name + '" .. done')
+            print(f'Loading {color["code"]} in set "premier" .. done')

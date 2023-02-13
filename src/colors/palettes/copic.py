@@ -1,7 +1,10 @@
-import json
-import os
+"""
+This module is part of the 'we-love-colors' package,
+which is released under MIT license.
+"""
 
-from .palette import Palette
+from ..palette import Palette
+from ..utils import hex2rgb
 
 
 class Copic(Palette):
@@ -9,29 +12,31 @@ class Copic(Palette):
     Holds Copic® utilities
     """
 
-    # Dictionary holding fetched colors
-    sets = {"copic": []}
-
     # Identifier
     identifier = "copic"
 
+    # Dictionary holding fetched colors
+    sets = {"copic": []}
+
     # Copyright notices
-    copyright = {
-        "xml": "\n    Copic® and related trademarks are the property of\n    Too Marker Corporation (https://www.toomarker.co.jp/en)\n  ",
-        "gpl": "##\n# Copic® and related trademarks are the property of\n# Too Marker Corporation (https://www.toomarker.co.jp/en)\n##\n",
+    copyright_notices = {
+        "xml": "\n    Copic® and related trademarks are the property of\n    "
+        + "Too Marker Corporation (https://www.toomarker.co.jp/en)\n  ",
+        "gpl": "##\n# Copic® and related trademarks are the property of\n"
+        + "# Too Marker Corporation (https://www.toomarker.co.jp/en)\n##\n",
     }
 
-    def __init__(self):
-        super().__init__()
+    def fetch_colors(self) -> None:
+        """
+        Fetches Copic® colors
 
-    ##
-    # Fetches Copic® colors
-    #
-    # Valid `set_name` parameter:
-    # - 'copic', currently 289 colors
-    ##
-    def fetch(self, set_name: str = "copic"):
-        # One baseURL to rule them all
+        Available sets:
+          - 'base' (currently 289 colors)
+
+        :return: None
+        """
+
+        # One URL to rule them all
         base_url = "https://copic.de/copic-classic-farb/bestellraster"
 
         # Scraping Copic® colors from HTML
@@ -40,21 +45,15 @@ class Copic(Palette):
         for color_tile in soup.find(
             "div", {"class": "collection-color--desktop"}
         ).find_all("div", {"class": "product-item-hex"}):
-            data_name = color_tile["data-name"]
-            data_list = data_name.split(" ")
-
-            hexadecimal = color_tile["style"][12:-8]
-            rgb_list = tuple(
-                int(hexadecimal.lstrip("#")[i : i + 2], 16) for i in (0, 2, 4)
-            )
-            rgb = [str(i) for i in rgb_list]
+            data = color_tile["data-name"].split(" ")
+            hexa = color_tile["style"][12:-8]
 
             color = {}
-            color["code"] = data_list.pop(0)
-            color["rgb"] = "rgb(" + ",".join(rgb) + ")"
-            color["hex"] = hexadecimal.upper()
-            color["name"] = " ".join(data_list)
+            color["code"] = data.pop(0)
+            color["rgb"] = "rgb(" + hex2rgb(hexa) + ")"
+            color["hex"] = hexa.upper()
+            color["name"] = " ".join(data)
 
-            self.sets[set_name].append(color)
+            self.sets["copic"].append(color)
 
-            print("Loading " + color["code"] + ' in set "' + set_name + '" .. done')
+            print(f'Loading {color["code"]} in set "copic" .. done')
