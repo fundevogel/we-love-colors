@@ -41,7 +41,7 @@ class Dulux(Palette):
         # One URL to rule them all
         base_url = "https://colour.dulux.ca/all-colors"
 
-        # Scraping Dulux® colors from HTML
+        # Scrape Dulux® colors from HTML
         soup = self.get_html(base_url)
 
         for color_tile in soup.find_all("a", {"class": "all-color-tile"}):

@@ -3,8 +3,6 @@ This module is part of the 'we-love-colors' package,
 which is released under MIT license.
 """
 
-import json
-import pathlib
 from typing import Dict, List, Optional
 
 from ..palette import Palette
@@ -72,7 +70,7 @@ class Pantone(Palette):
             "product-design": "industrial-designers",
         }
 
-        # Looping through URLs & scraping color information from HTML tables
+        # Looping through URLs & Scrape color information from HTML tables
         for i in range(first_page, last_page + 1):
             soup = self.get_html(f'{base_url}/{set_url["set_name"]}/{i}')
 

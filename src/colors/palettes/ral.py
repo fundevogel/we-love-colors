@@ -77,7 +77,7 @@ class RAL(Palette):
             + f"all-ral-colours-names/overview-ral-{set_name}-colours.html"
         )
 
-        # Scraping RAL® colors from HTML
+        # Scrape RAL® colors from HTML
         soup = self.get_html(base_url)
         color_grids = soup.find_all("ul", {"class": "color-grid"})
 
