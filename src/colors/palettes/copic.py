@@ -16,7 +16,11 @@ class Copic(Palette):
     identifier = "copic"
 
     # Dictionary holding fetched colors
-    sets = {"copic": []}
+    sets = {
+        "classic": [],
+        "sketch": [],
+        "ciao": [],
+    }
 
     # Copyright notices
     copyright_notices = {
@@ -28,32 +32,46 @@ class Copic(Palette):
 
     def fetch_colors(self) -> None:
         """
-        Fetches Copic® colors
+        Fetches all Copic® colors at once
 
         Available sets:
-          - 'base' (currently 289 colors)
+          - 'classic' (currently 289 colors)
+          - 'sketch'
+          - 'ciao'
 
         :return: None
         """
 
-        # One URL to rule them all
-        base_url = "https://copic.de/copic-classic-farb/bestellraster"
+        self.fetch("classic")
+        self.fetch("sketch")
+        self.fetch("ciao")
 
-        # Scraping Copic® colors from HTML
+    def fetch(self, set_name: str) -> None:
+        """
+        Fetches Copic® colors
+
+        :param set_name: str Name of color set
+        :return: None
+        """
+
+        # One URL to rule them all
+        base_url = f"https://copic.de/copic-{set_name}-farb/bestellraster"
+
+        # Scrape Copic® colors from HTML
         soup = self.get_html(base_url)
 
-        for color_tile in soup.find(
-            "div", {"class": "collection-color--desktop"}
-        ).find_all("div", {"class": "product-item-hex"}):
-            data = color_tile["data-name"].split(" ")
-            hexa = color_tile["style"][12:-8]
+        for color_block in soup.find_all("div", {"class": "copic-colors__color-block"}):
+            hexa = color_block.find("div", {"class": "copic-colors__cap"})[
+                "style"
+            ].split()[1]
+            name = color_block.find("div", {"class": "copic-colors__color-name"})
 
             color = {}
-            color["code"] = data.pop(0)
-            color["rgb"] = "rgb(" + hex2rgb(hexa) + ")"
+            color["code"] = color_block.find("strong").text
+            color["rgb"] = f"rgb({hex2rgb(hexa)})"
             color["hex"] = hexa.upper()
-            color["name"] = " ".join(data)
+            color["name"] = name.text
 
-            self.sets["copic"].append(color)
+            self.sets[set_name].append(color)
 
-            print(f'Loading {color["code"]} in set "copic" .. done')
+            print(f'Loading {color["code"]} in set "{set_name}" .. done')
