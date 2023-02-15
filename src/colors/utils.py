@@ -102,4 +102,4 @@ def hex2rgb(hexa: str) -> str:
     :return: str RGB values
     """
 
-    return ",".join([str(hexa.lstrip("#")[i : i + 2], 16) for i in (0, 2, 4)])
+    return ",".join([str(int(hexa.lstrip("#")[i : i + 2], 16)) for i in (0, 2, 4)])
