@@ -8,7 +8,8 @@ from typing import Dict, List, Optional, Tuple
 import click
 
 from .palette import Palette
-from .palettes import RAL, Copic, Dulux, Pantone, Prismacolor
+from .palettes import NCS, RAL, Copic, Dulux, Pantone, Prismacolor
+
 
 # Define available file fornats
 FORMATS: List[str] = [
@@ -18,14 +19,14 @@ FORMATS: List[str] = [
     "xml",
 ]
 
-
 # Map available brands & their classes
 PALETTES: Dict[str, Palette] = {
-    # "copic": Copic,
+    "copic": Copic,
     "dulux": Dulux,
+    "ncs": NCS,
     "pantone": Pantone,
-    # "prismacolor": Prismacolor,
-    # "ral": RAL,
+    "prismacolor": Prismacolor,
+    "ral": RAL,
 }
 
 
@@ -47,7 +48,7 @@ def cli(brands: Optional[Tuple[str]], palette: str):
             obj = Brand()
 
             # Retrieve brand colors
-            # obj.fetch_colors()
+            obj.fetch_colors()
 
             # Create (selected) palettes
             obj.make_palettes(palette)
