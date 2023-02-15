@@ -30,11 +30,20 @@ PALETTES: Dict[str, Palette] = {
 }
 
 
-@click.command(context_settings=dict(help_option_names=["-h", "--help"]))
-@click.argument("brands", nargs=-1)
-@click.option("-f", "--palette", type=click.Choice(FORMATS), help="Palette format(s).")
+@click.group(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.version_option("1.1.0", "-v", "--version")
-def cli(brands: Optional[Tuple[str]], palette: str):
+def cli():
+    """
+    PANTONE®, RAL®, Dulux®, Copic® and Prismacolor®
+    color palettes for Scribus, GIMP & Inkscape
+    """
+
+
+@cli.command(context_settings=dict(help_option_names=["-h", "--help"]))
+@click.argument("brands", nargs=-1)
+@click.option("-p", "--palette", type=click.Choice(FORMATS), help="Palette format(s).")
+@click.version_option("1.1.0", "-v", "--version")
+def fetch(brands: Optional[Tuple[str]], palette: str):
     """
     BRANDS:
     pantone | ral | dulux | copic | prismacolor

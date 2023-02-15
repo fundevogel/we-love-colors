@@ -26,36 +26,42 @@ For now, `we-love-colors` creates master palettes for use in
 - [LibreOffice](https://www.libreoffice.org) (SOC)
 
 
-## Getting started
+## Installation
 
-Running `setup.sh` will install all dependencies inside a virtual environment, ready for action. Have a look first so you know what's going on ;)
+It's available from [PyPi](https://pypi.org/project/gesetze) using `pip`:
 
-
-## Usage
-
-Fetching color sets and processing them is really straightforward - for everything else, there's  `--help`:
-
-```bash
-$ colors
-Usage: colors [OPTIONS] COMMAND [ARGS]...
-
-Options:
-  -v, --version  Show the version and exit.
-  -h, --help     Show this message and exit.
-
-Commands:
-  fetch    ARGS: pantone | ral | dulux | copic | prismacolor
-  process  ARGS: pantone | ral | dulux | copic | prismacolor
+```text
+pip install colors
 ```
 
-Using its commands `fetch` and `process` is fairly easy, like that:
+
+## Getting started
+
+Using this library is straightforward  - otherwise, `--help` is your friend:
+
+```bash
+$ colors fetch --help
+Usage: colors fetch [OPTIONS] [BRANDS]...
+
+  BRANDS: pantone | ral | dulux | copic | prismacolor
+
+Options:
+  -p, --palette [acb|gpl|soc|xml]  Palette format(s).
+  -v, --version                    Show the version and exit.
+  -h, --help                       Show this message and exit.
+```
+
+Using its `fetch` command is fairly easy, like that:
 
 ```bash
 # Example 1 - Gotta fetch 'em `all`:
-$ colors fetch && colors process
+$ colors fetch
 
-# Example 2 - Obtain & process specific sets:
-$ colors fetch copic dulux && colors process copic dulux
+# Example 2 - Only specific palettes:
+$ colors fetch copic dulux
+
+# Example 3 - Only GPL files for GIMP:
+$ colors fetch copic dulux -p gpl
 ```
 
 ## FAQ
@@ -87,12 +93,13 @@ When clicking a color tile, its hex value is copied to your clipboard - brought 
 Whenever mentioned throughout this project, PANTONE® and related trademarks are the property of [Pantone LLC](https://www.pantone.com), a division of [X-Rite](https://www.xrite.com), a [Danaher](https://www.danaher.com) company.
 
 The same applies to ..
-- RAL® and related trademarks of [RAL gGmbH](https://www.ral-farben.de) (non-profit LLC) and [RAL Deutsches Institut für Gütesicherung und Kennzeichnung e. V.](https://www.ral.de)
-- Dulux® and related trademarks of [AkzoNobel N.V.](https://www.akzonobel.com) (worldwide) and [DuluxGroup](https://www.dulux.com.au) (Australia & New Zealand)
 - Copic® and related trademarks of [Too Marker Corporation](https://www.toomarker.co.jp/en)
+- Dulux® and related trademarks of [AkzoNobel N.V.](https://www.akzonobel.com) (worldwide) and [DuluxGroup](https://www.dulux.com.au) (Australia & New Zealand)
+- Natural Colour System® and related trademarks of [NCS Colour AB](https://ncscolour.com)
 - Prismacolor® and related trademarks of [Berol Corporation](http://www.berol.co.uk), owned by [Sanford L.P.](http://www.sanfordb2b.com), a [Newell Brands](https://www.newellbrands.com) company.
+- RAL® and related trademarks of [RAL gGmbH](https://www.ral-farben.de) (non-profit LLC) and [RAL Deutsches Institut für Gütesicherung und Kennzeichnung e. V.](https://www.ral.de)
 
-We assume neither ownership nor intellectual property of any kind - color codes (and names), sRGB and/or hexadecimal values are publically available on (one of) their respective websites.
+We assume neither ownership nor intellectual property of any kind - color codes (and names), sRGB and/or hexadecimal values are publically available on the internet.
 
 
 ## Similar projects
