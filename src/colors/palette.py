@@ -62,7 +62,7 @@ class Palette:
 
         # Create path for brand colors
         self.brand_path = pathlib.Path.cwd() / "palettes" / self.identifier
-        self.brand_path.parent.mkdir(parents=True, exist_ok=True)
+        self.brand_path.mkdir(parents=True, exist_ok=True)
 
     def get(self, url: str) -> requests.Response:
         """
