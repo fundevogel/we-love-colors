@@ -64,12 +64,12 @@ class Palette:
         self.brand_path = pathlib.Path.cwd() / "palettes" / self.identifier
         self.brand_path.parent.mkdir(parents=True, exist_ok=True)
 
-    def get_html(self, url: str) -> str:
+    def get(self, url: str) -> requests.Response:
         """
-        Fetches HTML for given URL
+        Sends 'GET' request
 
         :param url: str Target URL
-        :return: str Source HTML
+        :return: requests.Response HTTP response
         """
 
         # Open HTTP session
@@ -77,21 +77,50 @@ class Palette:
             # Set headers (using random UA)
             session.headers = {"User-Agent": random.choice(self.ua)}
 
-            # Attempt to ..
-            try:
-                # .. fetch URL contents
-                response = session.get(url, timeout=10)
+            # .. fetch URL contents
+            response = session.get(url, timeout=10)
 
-                # Unless HTTP status indicates problem ..
-                response.raise_for_status()
+            # Unless status code indicates problem ..
+            response.raise_for_status()
 
-                # .. provide HTML text
-                return bs4.BeautifulSoup(response.text, "lxml")
+            # .. provide HTTP response
+            return response
 
-            # .. otherwise ..
-            except requests.exceptions.HTTPError:
-                # .. provide empty results
-                return bs4.BeautifulSoup("", "lxml")
+    def get_html(self, url: str) -> bs4.BeautifulSoup:
+        """
+        Fetches HTML for given URL
+
+        :param url: str Target URL
+        :return: bs4.BeautifulSoup Source HTML
+        """
+
+        # Attempt to ..
+        try:
+            # .. fetch source HTML
+            return bs4.BeautifulSoup(self.get(url).text, "lxml")
+
+        # .. otherwise ..
+        except requests.exceptions.HTTPError:
+            # .. provide empty results
+            return bs4.BeautifulSoup("", "lxml")
+
+    def get_json(self, url: str) -> List[dict]:
+        """
+        Fetches JSON for given URL
+
+        :param url: str Target URL
+        :return: list Source JSON
+        """
+
+        # Attempt to ..
+        try:
+            # .. fetch source JSON
+            return self.get(url).json()
+
+        # .. otherwise ..
+        except requests.exceptions.HTTPError:
+            # .. provide empty results
+            return []
 
     def make_palettes(self, palette: Optional[str]) -> None:
         """

@@ -42,28 +42,19 @@ class Prismacolor(Palette):
         """
 
         # One URL to rule them all
-        base_url = (
-            "https://kredki.eu/pl/p/Prismacolor-Colored-Pencils-Kredki-Art-150-Kol/75"
-        )
+        base_url = "https://swatchtool.com/data_prismacolor.json"
 
-        # Scraping Prismacolor® colors from HTML
-        soup = self.get_html(base_url)
+        # Load Prismacolor® colors as JSON
+        data = self.get_json(base_url)
 
-        for list_element in soup.find("div", {"class": "resetcss"}).findAll("li")[1:]:
+        for item in data:
             # Create data array
             color = {}
 
-            if not list_element.text[0:2] == "PC":
-                continue
-
-            line = list_element.text.split(":")
-            data = line[0][0:-4].split(" ")
-            rgb_string = line[1][:-4].replace(" ", "")
-
-            color["code"] = " ".join([data.pop(0), data.pop(0)])
-            color["rgb"] = "rgb(" + rgb_string + ")"
-            color["hex"] = rgb2hex(rgb_string)
-            color["name"] = " ".join(data)
+            color["code"] = f'PC {item["id"]}'
+            color["rgb"] = f'rgb({item["rgb"]})'
+            color["hex"] = rgb2hex(item["rgb"])
+            color["name"] = item["name"]
 
             self.sets["premier"].append(color)
 
