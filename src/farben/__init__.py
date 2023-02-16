@@ -30,7 +30,7 @@ PALETTES: Dict[str, Palette] = {
 
 
 @click.group(context_settings=dict(help_option_names=["-h", "--help"]))
-@click.version_option("2.0.0-beta", "-v", "--version")
+@click.version_option("2.0.0-rc", "-v", "--version")
 def cli():
     """
     PANTONE®, RAL®, Dulux®, Copic®, NCS® and Prismacolor® color palettes

@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "farben"
-version = "2.0.0-beta"
+version = "2.0.0-rc"
 description = "PANTONE®, RAL®, Dulux®, Copic® and Prismacolor® color palettes for Scribus, GIMP & Inkscape, the Python way"
 license = "MIT"
 authors = ["Fundevogel <maschinenraum@fundevogel.de>"]
