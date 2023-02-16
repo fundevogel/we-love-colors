@@ -6,3 +6,5 @@
 tasks.py                    export-ignore
 tests                       export-ignore
 .pre-commit-config.yaml     export-ignore
+.python-version             export-ignore
+.woodpecker.yml             export-ignore
