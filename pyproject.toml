@@ -5,23 +5,29 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry]
 name = "farben"
 version = "2.0.0-rc"
-description = "PANTONE®, RAL®, Dulux®, Copic® and Prismacolor® color palettes for Scribus, GIMP & Inkscape, the Python way"
+description = "PANTONE®, RAL®, Dulux®, Copic®, NCS® and Prismacolor® color palettes for Scribus, GIMP, AutoCAD, Inkscape & LibreOffice"
 license = "MIT"
 authors = ["Fundevogel <maschinenraum@fundevogel.de>"]
 maintainers = ["Martin Folkers <hello@twobrain.io>"]
 readme = "README.md"
 homepage = "https://fundevogel.de"
-repository = "https://codeberg.org/fundevogel/farben"
+repository = "https://codeberg.org/Fundevogel/farben"
 keywords = [
+    "autocad",
+    "color-palettes",
     "colors",
     "copic",
     "dulux",
     "gimp",
     "inkscape",
+    "libreoffice",
+    "ncs",
+    "palettes",
     "pantone",
     "prismacolor",
     "ral",
     "scribus",
+    "swatches",
 ]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -71,7 +77,7 @@ requests = "^2"
 
 [tool.poetry.urls]
 "Funding" = "https://donate.rsf.org"
-"Issue Tracker" = "https://codeberg.org/fundevogel/farben/issues"
+"Issue Tracker" = "https://codeberg.org/Fundevogel/farben/issues"
 
 [tool.poetry.scripts]
 farben = "farben:cli"
