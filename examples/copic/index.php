@@ -12,7 +12,7 @@
   <body>
     <?php
         // GLOBAL FUNCTIONS & VARIABLES
-        $files = glob('../../palettes/copic/json/*/*.json');
+        $file = '../../palettes/copic/colors.json';
     ?>
     <h1>Copic® color palettes</h1>
 

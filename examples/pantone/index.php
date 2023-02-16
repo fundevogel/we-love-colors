@@ -12,7 +12,7 @@
   <body>
     <?php
         // GLOBAL FUNCTIONS & VARIABLES
-        $files = glob('../../palettes/pantone/json/*/*.json');
+        $file = '../../palettes/pantone/colors.json';
     ?>
     <h1>PANTONE® color palettes</h1>
 

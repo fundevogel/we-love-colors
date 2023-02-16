@@ -12,7 +12,7 @@
   <body>
     <?php
         // GLOBAL FUNCTIONS & VARIABLES
-        $files = glob('../../palettes/ral/json/*/*.json');
+        $file = '../../palettes/ral/colors.json';
     ?>
     <h1>RAL® color palettes</h1>
 

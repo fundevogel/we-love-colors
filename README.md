@@ -90,9 +90,12 @@ $ farben fetch copic dulux -p gpl
 
 If you are looking for a quick way to browse PANTONE® colors, check out the [Pantone Finder](https://github.com/picorana/Pantone_finder) package or [visit their website](https://picorana.github.io/Pantone_finder) to get started.
 
-For ~~all~~ most included colors, there are preview files, to be found in the `examples` folder: Open up `index.html`, generated with `examples.py` (for its PHP version, just `php -S localhost:8000`).
+Once you retrieved color palettes, you can
 
-When clicking a color tile, its hex value is copied to your clipboard - brought to you by [clipboard.js](https://github.com/zenorocha/clipboard.js).
+- view them using PHP like this: `cd examples/{brand} && php -S localhost:8000`
+- view static HTML page like this: `cd examples && python build.py`
+
+When clicking on a color tile, its hex value is copied to your clipboard (powered by [clipboard.js](https://github.com/zenorocha/clipboard.js)).
 
 
 ## Copyright

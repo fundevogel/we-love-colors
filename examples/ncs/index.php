@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Prismacolor® color palettes</title>
+    <title>Natural Colour System® color palettes</title>
 
     <style media="screen">
       <?php include('../examples.css') ?>
@@ -12,14 +12,13 @@
   <body>
     <?php
         // GLOBAL FUNCTIONS & VARIABLES
-        $file = '../../palettes/prismacolor/colors.json';
+        $file = '../../palettes/dulux/colors.json';
     ?>
-    <h1>Prismacolor® color palettes</h1>
+    <h1>Natural Colour System® color palettes</h1>
 
     <!-- COPYRIGHT NOTICE -->
     <header>
-      Prismacolor® and related trademarks are the property of <a href="http://www.berol.co.uk">Berol Corporation</a>,
-      owned by <a href="http://www.sanfordb2b.com">Sanford L.P.</a>, a <a href="https://www.newellbrands.com">Newell Brands</a> company.
+      Natural Colour System® and related trademarks are the property of <a href="https://ncscolour.com">NCS Colour AB</a>
     </header>
 
     <?php include('../grid.php') ?>

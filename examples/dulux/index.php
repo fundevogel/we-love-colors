@@ -12,7 +12,7 @@
   <body>
     <?php
         // GLOBAL FUNCTIONS & VARIABLES
-        $files = glob('../../palettes/dulux/json/*/*.json');
+        $file = '../../palettes/dulux/colors.json';
     ?>
     <h1>Dulux® color palettes</h1>
 

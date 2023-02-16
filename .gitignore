@@ -144,4 +144,5 @@ cython_debug/
 poetry.lock
 
 # Gotta fetch 'em all!
+/examples/*/index.html
 /palettes
