@@ -1,4 +1,4 @@
-# We love farben!
+# farben
 [![License](https://badgen.net/badge/license/MIT/blue)](https://codeberg.org/Fundevogel/farben/src/branch/main/LICENSE) [![PyPI](https://badgen.net/pypi/v/farben)](https://pypi.org/project/farben) [![Build](https://ci.codeberg.org/api/badges/Fundevogel/farben/status.svg)](https://codeberg.org/Fundevogel/farben/issues)
 
 This library provides an easy way to generate **color palettes**:
@@ -46,30 +46,43 @@ poetry add farben
 
 Using this library is straightforward  - otherwise, `--help` is your friend:
 
-```bash
+```text
 $ farben fetch --help
-Usage: farben fetch [OPTIONS] [BRANDS]...
+Usage: farben [OPTIONS] COMMAND [ARGS]...
 
-  BRANDS: pantone | ral | dulux | copic | prismacolor
+  PANTONE®, RAL®, Dulux®, Copic®, NCS® and Prismacolor® color palettes for
+  Scribus, GIMP, AutoCAD, Inkscape & LibreOffice.
 
 Options:
-  -p, --palette [acb|gpl|soc|xml]  Palette format(s).
-  -v, --version                    Show the version and exit.
-  -h, --help                       Show this message and exit.
+  -v, --version  Show the version and exit.
+  -h, --help     Show this message and exit.
+
+Commands:
+  fetch  BRANDS: pantone | ral | dulux | copic | ncs | prismacolor
 ```
 
 Using its `fetch` command is fairly easy, like that:
 
 ```bash
-# Example 1 - Gotta fetch 'em `all`:
+# Example 1
+# - all brands
+# - all palettes
 $ farben fetch
 
-# Example 2 - Only specific palettes:
-$ farben fetch copic dulux
+# Example 2
+# - all brands
+# - only specific palette(s)
+$ farben fetch -p gpl
+$ farben fetch -p gpl -p acb
 
-# Example 3 - Only GPL files for GIMP:
-$ farben fetch copic dulux -p gpl
+# Example 3
+# - only specific brand(s)
+$ farben fetch copic
+$ farben fetch copic dulux
 ```
+
+.. you get the idea!
+
 
 ## FAQ
 

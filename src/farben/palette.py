@@ -3,17 +3,18 @@ This module is part of the 'farben' package,
 which is released under MIT license.
 """
 
+import abc
 import json
 import pathlib
 import random
-from typing import Dict, List, Optional
+from typing import Dict, List, Tuple
 
 import bs4
 from lxml import etree
 import requests
 
 
-class Palette:
+class Palette(abc.ABC):
     """
     Holds basic palette utilities
     """
@@ -122,13 +123,15 @@ class Palette:
             # .. provide empty results
             return []
 
-    def make_palettes(self, palette: Optional[str]) -> None:
+    def fetch_colors(self) -> None:
         """
-        Makes color palettes for one or all palette types
+        Fetches color sets & stores them as JSON
 
-        :param palette: str | None
         :return: None
         """
+
+        # Gotta fetch 'em all
+        self.fetch_all()
 
         # Build path to JSON file (= main file)
         data_file = self.brand_path / "colors.json"
@@ -138,15 +141,33 @@ class Palette:
 
         print(f'Saving "{data_file.relative_to(pathlib.Path.cwd())}" .. done')
 
+    @abc.abstractmethod
+    def fetch_all(self) -> None:
+        """
+        Fetches all available colors at once (hook method)
+
+        :return: None
+        """
+
+    def make_palettes(self, dtypes: Tuple[str]) -> None:
+        """
+        Makes color palettes for one or all palette types
+
+        :param dtypes: tuple
+        :return: None
+        """
+
+        # If palettes are empty ..
+        if not dtypes:
+            # .. fallback to all available types
+            dtypes = ["acb", "gpl", "soc", "xml"]
+
         # Build & create path to color sets
         sets_path = self.brand_path / "sets"
         sets_path.mkdir(parents=True, exist_ok=True)
 
-        # Iterate over available palette types
-        for dtype in ["acb", "gpl", "soc", "xml"]:
-            if palette is not None and dtype is not palette:
-                continue
-
+        # Iterate over (selected) palette types
+        for dtype in [dtype.lower() for dtype in dtypes]:
             # Iterate over color sets
             for set_name, data in self.sets.items():
                 # Build path to palette file

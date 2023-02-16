@@ -45,7 +45,7 @@ class RAL(Palette):
         + "e. V. (https://www.ral.de)\n##\n",
     }
 
-    def fetch_colors(self) -> None:
+    def fetch_all(self) -> None:
         """
         Fetches all RAL® colors at once
 

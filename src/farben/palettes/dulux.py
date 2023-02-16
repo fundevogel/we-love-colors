@@ -28,7 +28,7 @@ class Dulux(Palette):
         + "# DuluxGroup (https://www.dulux.com.au) (Australia & New Zealand) \n##\n",
     }
 
-    def fetch_colors(self) -> None:
+    def fetch_all(self) -> None:
         """
         Fetches Dulux® colors
 

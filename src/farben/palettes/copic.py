@@ -30,7 +30,7 @@ class Copic(Palette):
         + "# Too Marker Corporation (https://www.toomarker.co.jp/en)\n##\n",
     }
 
-    def fetch_colors(self) -> None:
+    def fetch_all(self) -> None:
         """
         Fetches all Copic® colors at once
 

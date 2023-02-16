@@ -7,25 +7,13 @@ from typing import Dict, List, Optional, Tuple
 
 import click
 
-from .palette import Palette
 from .palettes import NCS, RAL, Copic, Dulux, Pantone, Prismacolor
 
-# Define available file fornats
-FORMATS: List[str] = [
-    "acb",
-    "gpl",
-    "soc",
-    "xml",
-]
 
-# Map available brands & their classes
-PALETTES: Dict[str, Palette] = {
-    "pantone": Pantone,
-    "ral": RAL,
-    "dulux": Dulux,
-    "copic": Copic,
-    "ncs": NCS,
-    "prismacolor": Prismacolor,
+fetch_args = {
+    "type": click.Choice(["acb", "gpl", "soc", "xml"]),
+    "multiple": True,
+    "help": "Palette format(s).",
 }
 
 
@@ -38,17 +26,27 @@ def cli():
     """
 
 
-@cli.command(context_settings=dict(help_option_names=["-h", "--help"]))
+@cli.command()
 @click.argument("brands", nargs=-1)
-@click.option("-p", "--palette", type=click.Choice(FORMATS), help="Palette format(s).")
-def fetch(brands: Optional[Tuple[str]], palette: str):
+@click.option("-p", "--palette", **fetch_args)
+def fetch(brands: Optional[Tuple[str]], palette: Tuple[str]):
     """
     BRANDS:
     pantone | ral | dulux | copic | ncs | prismacolor
     """
 
+    # Map available brands & their classes
+    all_brands = {
+        "pantone": Pantone,
+        "ral": RAL,
+        "dulux": Dulux,
+        "copic": Copic,
+        "ncs": NCS,
+        "prismacolor": Prismacolor,
+    }
+
     # Iterate over available brands
-    for brand, Brand in PALETTES.items():
+    for brand, Brand in all_brands.items():
         # Check whether single or all brands are selected
         if not brands or brand in brands:
             # Initialize object

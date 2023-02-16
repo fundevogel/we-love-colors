@@ -34,7 +34,7 @@ class Pantone(Palette):
         + "a Danaher company\n##\n",
     }
 
-    def fetch_colors(self) -> None:
+    def fetch_all(self) -> None:
         """
         Fetches all PANTONE® colors at once
 

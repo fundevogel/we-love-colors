@@ -30,7 +30,7 @@ class Prismacolor(Palette):
         + "# a Newell Brands (https://www.newellbrands.com) company\n##\n",
     }
 
-    def fetch_colors(self) -> None:
+    def fetch_all(self) -> None:
         """
         Fetches Prismacolor® colors
 

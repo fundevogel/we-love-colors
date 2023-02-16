@@ -26,7 +26,7 @@ class NCS(Palette):
         + "\n# NCS Colour AB (https://ncscolour.com) \n##\n",
     }
 
-    def fetch_colors(self) -> None:
+    def fetch_all(self) -> None:
         """
         Fetches Natural Colour System® colors
 
