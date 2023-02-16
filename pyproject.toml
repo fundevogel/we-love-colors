@@ -52,7 +52,6 @@ python = "^3.8"
 beautifulsoup4 = "^4"
 click = "^8"
 lxml = "^4"
-pillow = "^9"
 requests = "^2"
 
 [tool.poetry.group.dev.dependencies]
@@ -72,7 +71,6 @@ tox-pyenv = "^1"
 beautifulsoup4 = "^4"
 click = "^8"
 lxml = "^4"
-pillow = "^9"
 requests = "^2"
 
 [tool.poetry.urls]
@@ -118,7 +116,6 @@ deps =
     beautifulsoup4
     click
     lxml
-    pillow
     requests
 commands = pytest
 """
