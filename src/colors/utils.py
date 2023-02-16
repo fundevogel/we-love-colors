@@ -8,8 +8,10 @@ from typing import Callable, List, Union
 
 RGB_REGEX = re.compile(
     r"""
-    # leading 'rgb' & opening bracket (optional)
+    # leading 'rgb', opening bracket (optional)
     (?:rgb\()?
+    # whitespace(s) (optional)
+    (\s*)?
     # red
     (?P<red>[0-9]|1[0-9]|2[0-4][0-9]|25[0-5])*
     # whitespace(s) & comma
@@ -20,8 +22,8 @@ RGB_REGEX = re.compile(
     (?:\s*),(?:\s*)
     # blue
     (?P<blue>[0-9]|1[0-9]|2[0-4]|25[0-5])*
-    # closing bracket (optional)
-    \)?
+    # whitespace(s) & closing bracket (optional)
+    (?:\s*)?\)?
     """,
     re.VERBOSE,
 )
@@ -102,4 +104,12 @@ def hex2rgb(hexa: str) -> str:
     :return: str RGB values
     """
 
-    return ",".join([str(int(hexa.lstrip("#")[i : i + 2], 16)) for i in (0, 2, 4)])
+    # Attempt to ..
+    try:
+        # .. convert string
+        return ",".join([str(int(hexa.lstrip("#")[i : i + 2], 16)) for i in (0, 2, 4)])
+
+    # If something goes wrong ..
+    except ValueError as error:
+        # .. report back
+        raise ValueError(f'Invalid HEX string: "{hexa}"') from error
