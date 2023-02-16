@@ -1,4 +1,5 @@
 # We love colors!
+[![License](https://badgen.net/badge/license/MIT/blue)](https://codeberg.org/Fundevogel/we-love-colors/src/branch/main/LICENSE) [![PyPI](https://badgen.net/pypi/v/colors)](https://pypi.org/project/colors) [![Build](https://ci.codeberg.org/api/badges/Fundevogel/we-love-colors/status.svg)](https://codeberg.org/Fundevogel/we-love-colors/issues)
 
 This library provides an easy way to generate [*color palettes*](https://www.etymonline.com/search?q=Palette):
 
@@ -16,6 +17,7 @@ This library provides an easy way to generate [*color palettes*](https://www.ety
 - [RAL®](https://www.ral-farben.de)
 - [Dulux®](https://www.dulux.com.au)
 - [Copic®](https://www.copicmarker.com)
+- [NCS®](https://ncscolour.com)
 - [Prismacolor®](https://www.prismacolor.com)
 
 For now, `we-love-colors` creates master palettes for use in
@@ -28,7 +30,7 @@ For now, `we-love-colors` creates master palettes for use in
 
 ## Installation
 
-It's available from [PyPi](https://pypi.org/project/gesetze) using `pip`:
+It's available from [PyPi](https://pypi.org/project/colors) using `pip`:
 
 ```text
 pip install colors
@@ -93,11 +95,11 @@ When clicking a color tile, its hex value is copied to your clipboard - brought 
 Whenever mentioned throughout this project, PANTONE® and related trademarks are the property of [Pantone LLC](https://www.pantone.com), a division of [X-Rite](https://www.xrite.com), a [Danaher](https://www.danaher.com) company.
 
 The same applies to ..
-- Copic® and related trademarks of [Too Marker Corporation](https://www.toomarker.co.jp/en)
+- RAL® and related trademarks of [RAL gGmbH](https://www.ral-farben.de) (non-profit LLC) and [RAL Deutsches Institut für Gütesicherung und Kennzeichnung e. V.](https://www.ral.de)
 - Dulux® and related trademarks of [AkzoNobel N.V.](https://www.akzonobel.com) (worldwide) and [DuluxGroup](https://www.dulux.com.au) (Australia & New Zealand)
+- Copic® and related trademarks of [Too Marker Corporation](https://www.toomarker.co.jp/en)
 - Natural Colour System® and related trademarks of [NCS Colour AB](https://ncscolour.com)
 - Prismacolor® and related trademarks of [Berol Corporation](http://www.berol.co.uk), owned by [Sanford L.P.](http://www.sanfordb2b.com), a [Newell Brands](https://www.newellbrands.com) company.
-- RAL® and related trademarks of [RAL gGmbH](https://www.ral-farben.de) (non-profit LLC) and [RAL Deutsches Institut für Gütesicherung und Kennzeichnung e. V.](https://www.ral.de)
 
 We assume neither ownership nor intellectual property of any kind - color codes (and names), sRGB and/or hexadecimal values are publically available on the internet.
 
