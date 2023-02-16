@@ -31,7 +31,7 @@ PALETTES: Dict[str, Palette] = {
 
 
 @click.group(context_settings=dict(help_option_names=["-h", "--help"]))
-@click.version_option("1.1.0", "-v", "--version")
+@click.version_option("2.0.0-beta", "-v", "--version")
 def cli():
     """
     PANTONE®, RAL®, Dulux®, Copic® and Prismacolor®
@@ -42,7 +42,6 @@ def cli():
 @cli.command(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.argument("brands", nargs=-1)
 @click.option("-p", "--palette", type=click.Choice(FORMATS), help="Palette format(s).")
-@click.version_option("1.1.0", "-v", "--version")
 def fetch(brands: Optional[Tuple[str]], palette: str):
     """
     BRANDS:
