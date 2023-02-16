@@ -72,7 +72,7 @@ class Pantone(Palette):
 
         # Looping through URLs & Scrape color information from HTML tables
         for i in range(first_page, last_page + 1):
-            soup = self.get_html(f'{base_url}/{set_url["set_name"]}/{i}')
+            soup = self.get_html(f"{base_url}/{set_url[set_name]}/{i}")
 
             print(f"Loading page {i} .. done")
 
