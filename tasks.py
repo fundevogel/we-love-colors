@@ -8,7 +8,7 @@ import sys
 
 from invoke import task
 
-PKG_NAME = "colors"
+PKG_NAME = "farben"
 PKG_PATH = Path(f"src/{PKG_NAME}")
 TOOLS = ("poetry", "pre-commit")
 

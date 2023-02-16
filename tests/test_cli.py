@@ -1,11 +1,11 @@
 """
-This module is part of the 'we-love-colors' package,
+This module is part of the 'farben' package,
 which is released under MIT license.
 """
 
 from click.testing import CliRunner
 
-from colors import cli
+from farben import cli
 
 
 def test_cli():

@@ -1,5 +1,5 @@
 """
-This module is part of the 'we-love-colors' package,
+This module is part of the 'farben' package,
 which is released under MIT license.
 """
 

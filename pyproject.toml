@@ -3,7 +3,7 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-name = "we-love-colors"
+name = "farben"
 version = "2.0.0-beta"
 description = "PANTONE®, RAL®, Dulux®, Copic® and Prismacolor® color palettes for Scribus, GIMP & Inkscape, the Python way"
 license = "MIT"
@@ -11,7 +11,7 @@ authors = ["Fundevogel <maschinenraum@fundevogel.de>"]
 maintainers = ["Martin Folkers <hello@twobrain.io>"]
 readme = "README.md"
 homepage = "https://fundevogel.de"
-repository = "https://codeberg.org/fundevogel/we-love-colors"
+repository = "https://codeberg.org/fundevogel/farben"
 keywords = [
     "colors",
     "copic",
@@ -39,7 +39,7 @@ classifiers = [
     "Topic :: Internet :: WWW/HTTP",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-packages = [{include = "colors", from = "src"}]
+packages = [{include = "farben", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.8"
@@ -71,10 +71,10 @@ requests = "^2"
 
 [tool.poetry.urls]
 "Funding" = "https://donate.rsf.org"
-"Issue Tracker" = "https://codeberg.org/fundevogel/we-love-colors/issues"
+"Issue Tracker" = "https://codeberg.org/fundevogel/farben/issues"
 
 [tool.poetry.scripts]
-colors = "colors:cli"
+farben = "farben:cli"
 
 [tool.bandit]
 exclude_dirs = ["tests"]

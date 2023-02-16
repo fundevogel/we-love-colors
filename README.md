@@ -1,12 +1,12 @@
-# We love colors!
-[![License](https://badgen.net/badge/license/MIT/blue)](https://codeberg.org/Fundevogel/we-love-colors/src/branch/main/LICENSE) [![PyPI](https://badgen.net/pypi/v/colors)](https://pypi.org/project/colors) [![Build](https://ci.codeberg.org/api/badges/Fundevogel/we-love-colors/status.svg)](https://codeberg.org/Fundevogel/we-love-colors/issues)
+# We love farben!
+[![License](https://badgen.net/badge/license/MIT/blue)](https://codeberg.org/Fundevogel/farben/src/branch/main/LICENSE) [![PyPI](https://badgen.net/pypi/v/farben)](https://pypi.org/project/farben) [![Build](https://ci.codeberg.org/api/badges/Fundevogel/farben/status.svg)](https://codeberg.org/Fundevogel/farben/issues)
 
-This library provides an easy way to generate [*color palettes*](https://www.etymonline.com/search?q=Palette):
+This library provides an easy way to generate **color palettes**:
 
 > In computer graphics, a palette is a finite set of colors.
 > — Wikipedia article '[Palette (Computing)](https://en.wikipedia.org/wiki/Palette_(computing))'
 
-.. often referred to as *Swatches* (as branded by [Adobe Inc.](https://www.adobe.com)):
+.. often referred to as **Swatches** (as branded by [Adobe Inc.](https://www.adobe.com)):
 
 > *Swatches* are named colors, tints, gradients, and patterns.
 > — [Adobe Illustrator](https://helpx.adobe.com/illustrator/using/using-creating-swatches.html)
@@ -20,20 +20,25 @@ This library provides an easy way to generate [*color palettes*](https://www.ety
 - [NCS®](https://ncscolour.com)
 - [Prismacolor®](https://www.prismacolor.com)
 
-For now, `we-love-colors` creates master palettes for use in
+For now, `farben` creates master palettes for use in
 
 - [Scribus](https://www.scribus.net) (XML)
-- [GIMP](https://www.gimp.org) and [Inkscape](https://inkscape.org) (GPL)
+- [GIMP](https://www.gimp.org) (GPL)
 - [AutoCAD](https://www.autodesk.com/products/autocad) (ACB)
+- [Inkscape](https://inkscape.org) (GPL)
 - [LibreOffice](https://www.libreoffice.org) (SOC)
 
 
 ## Installation
 
-It's available from [PyPi](https://pypi.org/project/colors) using `pip`:
+It's available from [PyPi](https://pypi.org/project/farben):
 
-```text
-pip install colors
+```bash
+# Using 'pip'
+pip install farben
+
+# Using 'poetry'
+poetry add farben
 ```
 
 
@@ -42,8 +47,8 @@ pip install colors
 Using this library is straightforward  - otherwise, `--help` is your friend:
 
 ```bash
-$ colors fetch --help
-Usage: colors fetch [OPTIONS] [BRANDS]...
+$ farben fetch --help
+Usage: farben fetch [OPTIONS] [BRANDS]...
 
   BRANDS: pantone | ral | dulux | copic | prismacolor
 
@@ -57,13 +62,13 @@ Using its `fetch` command is fairly easy, like that:
 
 ```bash
 # Example 1 - Gotta fetch 'em `all`:
-$ colors fetch
+$ farben fetch
 
 # Example 2 - Only specific palettes:
-$ colors fetch copic dulux
+$ farben fetch copic dulux
 
 # Example 3 - Only GPL files for GIMP:
-$ colors fetch copic dulux -p gpl
+$ farben fetch copic dulux -p gpl
 ```
 
 ## FAQ
@@ -85,7 +90,7 @@ $ colors fetch copic dulux -p gpl
 
 If you are looking for a quick way to browse PANTONE® colors, check out the [Pantone Finder](https://github.com/picorana/Pantone_finder) package or [visit their website](https://picorana.github.io/Pantone_finder) to get started.
 
-For all included colors, there are preview files, to be found in the `examples` folder: Open up `index.html`, generated with `examples.py` (for its PHP version, just `php -S localhost:8000`).
+For ~~all~~ most included colors, there are preview files, to be found in the `examples` folder: Open up `index.html`, generated with `examples.py` (for its PHP version, just `php -S localhost:8000`).
 
 When clicking a color tile, its hex value is copied to your clipboard - brought to you by [clipboard.js](https://github.com/zenorocha/clipboard.js).
 

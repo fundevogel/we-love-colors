@@ -1,11 +1,11 @@
 """
-This module is part of the 'we-love-colors' package,
+This module is part of the 'farben' package,
 which is released under MIT license.
 """
 
 from pytest import raises
 
-from colors.utils import RGB_REGEX, hex2rgb, rgb2hex
+from farben.utils import RGB_REGEX, hex2rgb, rgb2hex
 
 
 def test_color_regex() -> None:

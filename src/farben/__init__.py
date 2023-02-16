@@ -1,5 +1,5 @@
 """
-This module is part of the 'we-love-colors' package,
+This module is part of the 'farben' package,
 which is released under MIT license.
 """
 
@@ -9,7 +9,6 @@ import click
 
 from .palette import Palette
 from .palettes import NCS, RAL, Copic, Dulux, Pantone, Prismacolor
-
 
 # Define available file fornats
 FORMATS: List[str] = [
@@ -21,12 +20,12 @@ FORMATS: List[str] = [
 
 # Map available brands & their classes
 PALETTES: Dict[str, Palette] = {
-    "copic": Copic,
-    "dulux": Dulux,
-    "ncs": NCS,
     "pantone": Pantone,
-    "prismacolor": Prismacolor,
     "ral": RAL,
+    "dulux": Dulux,
+    "copic": Copic,
+    "ncs": NCS,
+    "prismacolor": Prismacolor,
 }
 
 
@@ -34,8 +33,8 @@ PALETTES: Dict[str, Palette] = {
 @click.version_option("2.0.0-beta", "-v", "--version")
 def cli():
     """
-    PANTONE®, RAL®, Dulux®, Copic® and Prismacolor®
-    color palettes for Scribus, GIMP & Inkscape
+    PANTONE®, RAL®, Dulux®, Copic®, NCS® and Prismacolor® color palettes
+    for Scribus, GIMP, AutoCAD, Inkscape & LibreOffice.
     """
 
 
@@ -45,7 +44,7 @@ def cli():
 def fetch(brands: Optional[Tuple[str]], palette: str):
     """
     BRANDS:
-    pantone | ral | dulux | copic | prismacolor
+    pantone | ral | dulux | copic | ncs | prismacolor
     """
 
     # Iterate over available brands
