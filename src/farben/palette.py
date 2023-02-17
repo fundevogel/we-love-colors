@@ -212,7 +212,7 @@ class Palette(abc.ABC):
 
     def make_gpl(self, gpl_file: pathlib.Path, data: dict) -> None:
         """
-        Builds GPL color palette (GIMP + Inkscape)
+        Builds GPL color palette (GIMP, Inkscape & Krita)
 
         :param gpl_file: pathlib.Path Target GPL file
         :param data: dict Color data

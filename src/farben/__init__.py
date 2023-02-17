@@ -21,7 +21,7 @@ fetch_args = {
 def cli():
     """
     PANTONE®, RAL®, Dulux®, Copic®, NCS®, HKS® and Prismacolor® color palettes
-    for Scribus, GIMP, AutoCAD, Inkscape & LibreOffice.
+    for Scribus, GIMP, AutoCAD, Inkscape, Krita & LibreOffice.
     """
 
 

@@ -27,6 +27,7 @@ For now, `farben` creates master palettes for use in
 - [GIMP](https://www.gimp.org) (GPL)
 - [AutoCAD](https://www.autodesk.com/products/autocad) (ACB)
 - [Inkscape](https://inkscape.org) (GPL)
+- [Krita](https://krita.org) (GPL)
 - [LibreOffice](https://www.libreoffice.org) (SOC)
 
 
@@ -52,7 +53,7 @@ $ farben fetch --help
 Usage: farben [OPTIONS] COMMAND [ARGS]...
 
   PANTONE®, RAL®, Dulux®, Copic®, NCS®, HKS® and Prismacolor® color palettes
-  for Scribus, GIMP, AutoCAD, Inkscape & LibreOffice.
+  for Scribus, GIMP, AutoCAD, Inkscape, Krita & LibreOffice.
 
 Options:
   -v, --version  Show the version and exit.
@@ -97,6 +98,7 @@ $ farben fetch copic dulux
 - .. installing `.gpl` files boils down to:
   - moving them to any path specified in `Edit - Preferences - Folders - Palettes` (GIMP)
   - moving them to `palettes` under directory specified in `Edit - Preferences - System - User Config` (Inkscape)
+  - importing them using the [palette docker](https://docs.krita.org/en/reference_manual/dockers/palette_docker.html) (Krita)
 - .. installing `.acb` files is [pretty straightforward](https://knowledge.autodesk.com/support/autocad/learn-explore/caas/CloudHelp/cloudhelp/2016/ENU/AutoCAD-Core/files/GUID-17E00AB3-3065-4F1B-A1C3-C4963396D2CB-htm.html)
 
 
