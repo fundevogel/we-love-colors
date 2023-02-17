@@ -17,7 +17,7 @@ fetch_args = {
 
 
 @click.group(context_settings=dict(help_option_names=["-h", "--help"]))
-@click.version_option("2.0.1", "-v", "--version")
+@click.version_option("2.1.0", "-v", "--version")
 def cli():
     """
     PANTONE®, RAL®, Dulux®, Copic®, NCS®, HKS® and Prismacolor® color palettes
