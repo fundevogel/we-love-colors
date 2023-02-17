@@ -7,8 +7,7 @@ from typing import Dict, List, Optional, Tuple
 
 import click
 
-from .palettes import NCS, RAL, Copic, Dulux, Pantone, Prismacolor
-
+from .palettes import HKS, NCS, RAL, Copic, Dulux, Pantone, Prismacolor
 
 fetch_args = {
     "type": click.Choice(["acb", "gpl", "soc", "xml"]),
@@ -21,7 +20,7 @@ fetch_args = {
 @click.version_option("2.0.1", "-v", "--version")
 def cli():
     """
-    PANTONE®, RAL®, Dulux®, Copic®, NCS® and Prismacolor® color palettes
+    PANTONE®, RAL®, Dulux®, Copic®, NCS®, HKS® and Prismacolor® color palettes
     for Scribus, GIMP, AutoCAD, Inkscape & LibreOffice.
     """
 
@@ -32,7 +31,7 @@ def cli():
 def fetch(brands: Optional[Tuple[str]], palette: Tuple[str]):
     """
     BRANDS:
-    pantone | ral | dulux | copic | ncs | prismacolor
+    pantone | ral | dulux | copic | ncs | hks | prismacolor
     """
 
     # Map available brands & their classes
@@ -42,6 +41,7 @@ def fetch(brands: Optional[Tuple[str]], palette: Tuple[str]):
         "dulux": Dulux,
         "copic": Copic,
         "ncs": NCS,
+        "hks": HKS,
         "prismacolor": Prismacolor,
     }
 

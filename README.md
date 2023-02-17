@@ -18,6 +18,7 @@ This library provides an easy way to generate **color palettes**:
 - [Dulux®](https://www.dulux.com.au)
 - [Copic®](https://www.copicmarker.com)
 - [NCS®](https://ncscolour.com)
+- [HKS®](https://www.hks-farben.de)
 - [Prismacolor®](https://www.prismacolor.com)
 
 For now, `farben` creates master palettes for use in
@@ -50,15 +51,15 @@ Using this library is straightforward  - otherwise, `--help` is your friend:
 $ farben fetch --help
 Usage: farben [OPTIONS] COMMAND [ARGS]...
 
-  PANTONE®, RAL®, Dulux®, Copic®, NCS® and Prismacolor® color palettes for
-  Scribus, GIMP, AutoCAD, Inkscape & LibreOffice.
+  PANTONE®, RAL®, Dulux®, Copic®, NCS®, HKS® and Prismacolor® color palettes
+  for Scribus, GIMP, AutoCAD, Inkscape & LibreOffice.
 
 Options:
   -v, --version  Show the version and exit.
   -h, --help     Show this message and exit.
 
 Commands:
-  fetch  BRANDS: pantone | ral | dulux | copic | ncs | prismacolor
+  fetch  BRANDS: pantone | ral | dulux | copic | ncs | hks | prismacolor
 ```
 
 Using its `fetch` command is fairly easy, like that:
@@ -120,6 +121,7 @@ The same applies to ..
 - Dulux® and related trademarks of [AkzoNobel N.V.](https://www.akzonobel.com) (worldwide) and [DuluxGroup](https://www.dulux.com.au) (Australia & New Zealand)
 - Copic® and related trademarks of [Too Marker Corporation](https://www.toomarker.co.jp/en)
 - Natural Colour System® and related trademarks of [NCS Colour AB](https://ncscolour.com)
+- HKS® and related trademarks of [HKS Warenzeichenverband e.V](https://www.hks-farben.de)
 - Prismacolor® and related trademarks of [Berol Corporation](http://www.berol.co.uk), owned by [Sanford L.P.](http://www.sanfordb2b.com), a [Newell Brands](https://www.newellbrands.com) company.
 
 We assume neither ownership nor intellectual property of any kind - color codes (and names), sRGB and/or hexadecimal values are publically available on the internet.
