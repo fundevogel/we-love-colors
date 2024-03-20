@@ -58,7 +58,7 @@ requests = "^2"
 [tool.poetry.group.dev.dependencies]
 # Testing
 bandit = "^1"
-black = "^22"
+black = ">=22,<25"
 invoke = "^1"
 isort = "^5"
 pylint = "^2"
