@@ -52,7 +52,7 @@ packages = [{include = "farben", from = "src"}]
 python = "^3.8"
 beautifulsoup4 = "^4"
 click = "^8"
-lxml = "^4"
+lxml = ">=4,<7"
 requests = "^2"
 
 [tool.poetry.group.dev.dependencies]
@@ -71,7 +71,7 @@ tox-pyenv = "^1"
 # Packages
 beautifulsoup4 = "^4"
 click = "^8"
-lxml = "^4"
+lxml = ">=4,<7"
 requests = "^2"
 
 [tool.poetry.urls]
